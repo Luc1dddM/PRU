@@ -37,6 +37,7 @@ public class GrapplingHook : MonoBehaviour
                 grapplePosition.z = 0f;
 
                 // Bắt đầu Coroutine để dây xuất hiện dần
+
                 StartCoroutine(ShootRope());
             }
         }
