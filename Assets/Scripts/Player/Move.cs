@@ -13,7 +13,6 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb;
     public LayerMask groundMask;
 
-    public PhysicsMaterial2D bounceMat, normalMat;
     public bool canJump = true;
 
     // Start is called before the first frame update
@@ -43,15 +42,6 @@ public class Move : MonoBehaviour
 
         }
 
-        if(jumpSpeed > 0 && !isGrounded)
-        {
-            rb.sharedMaterial = bounceMat;
-        }
-        else
-        {
-            rb.sharedMaterial = normalMat;
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f,rb.velocity.y);
@@ -62,7 +52,7 @@ public class Move : MonoBehaviour
             float tempx = moveInput * walkSpeed;
             float tempy = jumpSpeed;
             rb.velocity = new Vector2(tempx, tempy);
-            Invoke("resetJump", 0.3f);
+            Invoke("resetJump", 0.1f);
         }
 
         if (Input.GetKeyUp(KeyCode.Space))

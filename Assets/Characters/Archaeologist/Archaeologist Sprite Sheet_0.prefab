@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4420682815091927946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -4.51, z: 0}
+  m_LocalPosition: {x: -5.5, y: -4.51, z: 5}
   m_LocalScale: {x: 11.558327, y: 8.707058, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,7 +112,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &7092908670225236069
 MonoBehaviour:
@@ -132,8 +132,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  bounceMat: {fileID: 6200000, guid: 715e290dad4b25c478bf89e6836d878e, type: 2}
-  normalMat: {fileID: 6200000, guid: bd3f369c0aba22f4f8b803acd8271dd0, type: 2}
   canJump: 1
 --- !u!61 &1824036565448810054
 BoxCollider2D:
