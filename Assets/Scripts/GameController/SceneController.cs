@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController Instance { get; private set; }
+    public string test = "";
 
     public Vector3 playerPosition;
 
@@ -27,6 +28,13 @@ public class SceneController : MonoBehaviour
         playerPosition = TransformPosition(currentPosition, sceneSize);
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadBackScene(Vector3 currentPosition, Vector3 sceneSize)
+    {
+        playerPosition = TransformPosition(currentPosition, sceneSize);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(test);
     }
 
     private Vector3 TransformPosition(Vector3 currentPosition, Vector3 sceneSize)
