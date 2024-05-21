@@ -9,6 +9,8 @@ public class SceneController : MonoBehaviour
     public string test = "";
 
     public Vector3 playerPosition;
+    public float playerJumpSpeed;
+    public Vector2 playerVelocity;
 
     private void Awake()
     {
@@ -25,12 +27,13 @@ public class SceneController : MonoBehaviour
 
     public void LoadScene(string sceneName, Vector3 currentPosition, Vector3 sceneSize)
     {
+
         playerPosition = TransformPosition(currentPosition, sceneSize);
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneName);
     }
 
-    public void LoadBackScene(Vector3 currentPosition, Vector3 sceneSize)
+    public void LoadBackScene(Vector3 currentPosition, Vector3 sceneSize, float currentSpeed)
     {
         playerPosition = TransformPosition(currentPosition, sceneSize);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -47,9 +50,16 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        Move playerController = player.GetComponent<Move>();
+
+        if (player != null && playerController != null)
         {
             player.transform.position = playerPosition;
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = playerVelocity;
+            }
         }
     }
 }

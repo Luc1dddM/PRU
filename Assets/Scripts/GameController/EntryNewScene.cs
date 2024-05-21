@@ -9,12 +9,16 @@ public class EntryNewScene : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+
+        Move playerController = collision.GetComponent<Move>();
+        if (playerController != null)
         {
-            Debug.Log(SceneController.Instance);
+            float playerJumpSpeed = playerController.jumpSpeed;
+
+            // You can now use the playerJumpSpeed variable as needed
             float height = 2f * Camera.main.orthographicSize;
-            Vector3 currentPosition = collision.transform.position; // Get current player position
-            Vector3 sceneSize = new Vector3(0, height - 16, 0);
+            Vector3 currentPosition = collision.transform.position;
+            Vector3 sceneSize = new Vector3(0, height - 15, 0);
             SceneController.Instance.LoadScene("SampleScene", currentPosition, sceneSize);
             SceneController.Instance.test = "RuinsMap1";
         }
