@@ -7,42 +7,66 @@ public class Move : MonoBehaviour
 
     public float walkSpeed = 8f;
     public float jumpSpeed = 0.0f;
+    public float jumpDistance = 2f;
+    public bool isGrounded;
+    public LayerMask groundMask;
+    public bool facingRight = true;
+    public bool canJump = true;
+    public Collider2D bodycollider;
+    public Collider2D Footcollider;
+    public PhysicsMaterial2D normalMa;
+    public PhysicsMaterial2D bounceMa;
+
 
     private float moveInput;
-    public bool isGrounded;
     private Rigidbody2D rb;
-    public LayerMask groundMask;
     private Animator animator;
-    public bool facingRight = true;
+    
 
-    public bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        Footcollider.sharedMaterial = normalMa;
     }
 
     // Update is called once per frame
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
-
+        
         if(jumpSpeed == 0.0f && isGrounded)
         {
+            
            CheckFacingDirection(moveInput);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
 
         }
 
+        if (isGrounded)
+        {
+            bodycollider.sharedMaterial = normalMa;
+            
+        }
+        else
+        {
+            bodycollider.sharedMaterial = bounceMa;
+        }
+
+
+
+
+
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.72f),
             new Vector2(1.12f, 0.30f), 0f, groundMask);
 
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
-            jumpSpeed += Time.deltaTime * 70f;
+            jumpSpeed += Time.deltaTime * 60f;
+            isJumping = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
@@ -50,20 +74,23 @@ public class Move : MonoBehaviour
             rb.velocity = new Vector2(0.0f,rb.velocity.y);
         }
 
-        if (jumpSpeed >= 30f && isGrounded)
+        if (jumpSpeed >= 27f && isGrounded)
         {
-            float tempx = moveInput * walkSpeed;
+            float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
+            Invoke("jumpStatus", 0.1f);
             rb.velocity = new Vector2(tempx, tempy);
-            Invoke("resetJump", 0.1f);
+            canJump = false;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed, jumpSpeed);
-                jumpSpeed = 0f;
+                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
+                Invoke("jumpStatus", 0.1f);
+
+
             }
             canJump = true;
         }
@@ -71,11 +98,32 @@ public class Move : MonoBehaviour
 
     }
 
-    void resetJump()
+    private void jumpStatus()
     {
-        
-        jumpSpeed = 0.0f;
+        isJumping = false;
     }
+
+    private void LateUpdate()
+    {
+        if (!isGrounded)
+        {
+            jumpSpeed =  0f;
+            
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            canJump = true;
+
+        }
+    }
+
+/*    void resetJump()
+    {
+
+        canJump = false;
+    }*/
+
 
     private void OnDrawGizmosSelected()
     {
