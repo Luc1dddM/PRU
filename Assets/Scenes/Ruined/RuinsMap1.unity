@@ -3058,11 +3058,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.41
+      value: -3.55
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.03
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3099,6 +3099,14 @@ PrefabInstance:
     - target: {fileID: 4420682815091927946, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_Name
       value: Archaeologist Sprite Sheet_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092908670225236069, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
+      propertyPath: jumpDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092908670225236069, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

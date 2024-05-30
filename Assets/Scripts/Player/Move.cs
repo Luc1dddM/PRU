@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
 
     public float walkSpeed = 8f;
     public float jumpSpeed = 0.0f;
-    public float jumpDistance = 2f;
+    public float jumpDistance = 1f;
 
     private float moveInput;
     public bool isGrounded;
@@ -56,6 +56,7 @@ public class Move : MonoBehaviour
             float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
             rb.velocity = new Vector2(tempx, tempy);
+            Invoke("resetJump", 0.1f);
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
@@ -123,12 +124,12 @@ public class Move : MonoBehaviour
     }
 
     // OnCollisionEnter2D is called when this object collides with another object
-    private void OnCollisionEnter2D(Collision2D collision)
+/*    private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the player collides with a ground object (e.g., platform, floor)
         if (collision.gameObject.CompareTag("Ground"))
         {
             jumpSpeed = 0.0f;
         }
-    }
+    }*/
 }

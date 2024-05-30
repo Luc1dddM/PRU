@@ -10,7 +10,8 @@ public class GrapplingHook : MonoBehaviour
 
     private Vector3 grapplePosition;
     private DistanceJoint2D distanceJoint;
-    private bool isGrappling = false; // Kiểm soát trạng thái đu dây
+    public bool isGrappling = false;
+    private bool isRenderLine = false;
 
     void Start()
     {
@@ -23,7 +24,8 @@ public class GrapplingHook : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !isGrappling)
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);   //Get position of mouse click
+            //Setup RayCast 
             RaycastHit2D hit = Physics2D.Raycast(
                 origin: mouseWorldPosition,
                 direction: Vector2.zero,
@@ -31,15 +33,19 @@ public class GrapplingHook : MonoBehaviour
                 layerMask: grappleLayer
             );
 
-            if (hit.collider != null)
-            {
-                grapplePosition = hit.point;
-                grapplePosition.z = 0f;
+            grapplePosition = hit.point;
+            grapplePosition.z = 0f;
 
-                // Bắt đầu Coroutine để dây xuất hiện dần
+            //Call Shoot Rope func
+            StartCoroutine(ShootRope(hit));
+        }
 
-                StartCoroutine(ShootRope());
-            }
+        //Stop grappling
+        if (Input.GetMouseButtonUp(0) && isGrappling)
+        {
+            distanceJoint.enabled = false;
+            rope.enabled = false;
+            isGrappling = false;
         }
 
         if (rope.enabled)
@@ -48,19 +54,28 @@ public class GrapplingHook : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootRope()
+    //Function to render rope and grapple
+    private IEnumerator ShootRope(RaycastHit2D hit)
     {
-        isGrappling = true;
-        float distance = Vector3.Distance(transform.position, grapplePosition);
+        //Start render line
+        isRenderLine = true;
+        float distance = Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         float time = distance / ropeShootSpeed;
         float elapsedTime = 0f;
 
-        rope.SetPosition(0, grapplePosition);
-        rope.SetPosition(1, transform.position);
-        rope.enabled = true;
+        if(distance > grappleLength)
+        {
+            grapplePosition = CalculatePointC(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position , grappleLength);
+        }
+        else
+        {
+            grapplePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
 
         while (elapsedTime < time)
         {
+            rope.enabled = true;
+
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / time;
 
@@ -71,22 +86,49 @@ public class GrapplingHook : MonoBehaviour
 
             yield return null;
         }
+        isRenderLine = false;
 
-        // Đảm bảo dây được đặt đúng vị trí khi Coroutine kết thúc
-        rope.SetPosition(0, grapplePosition);
+        if(hit.collider != null && (grappleLength >= distance))
+        {
+            isGrappling = true;
 
+            //Make sure position of rope (where rope stick to object) is right after render
+            rope.SetPosition(0, grapplePosition);
 
-        // Kích hoạt DistanceJoint2D để nhân vật có thể đu lên
-        distanceJoint.enabled = true;
-        distanceJoint.connectedAnchor = grapplePosition;
-        distanceJoint.distance = grappleLength;
-
-        isGrappling = false; // Hoàn tất đu dây
+            // Enable Distance joint to grapple
+            distanceJoint.enabled = true;
+            distanceJoint.connectedAnchor = grapplePosition;
+            distanceJoint.distance = grappleLength;
+        }
+        else
+        {
+            rope.enabled = false;
+        }
     }
 
+
+    //Stop grapple when hit an object
     private void OnCollisionEnter2D(Collision2D collision)
     {
         distanceJoint.enabled = false;
         rope.enabled = false;
     }
+
+    Vector3 CalculatePointC(Vector3 A, Vector3 B, float distance)
+    {
+        // Bước 1: Tính toán vector hướng từ B đến A
+        Vector3 direction = A - B;
+
+        // Bước 2: Chuẩn hóa vector hướng để có vector đơn vị
+        Vector3 unitDirection = direction.normalized;
+
+        // Bước 3: Nhân vector đơn vị với khoảng cách mong muốn
+        Vector3 offset = unitDirection * distance;
+
+        // Bước 4: Trừ vector này từ B để lấy điểm C
+        Vector3 C = B + offset;
+
+        return C;
+    }
+
 }
