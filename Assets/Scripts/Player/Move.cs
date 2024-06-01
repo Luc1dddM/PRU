@@ -12,6 +12,7 @@ public class Move : MonoBehaviour
     public LayerMask groundMask;
     public bool facingRight = true;
     public bool canJump = true;
+   
     public Collider2D bodycollider;
     public Collider2D Footcollider;
     public PhysicsMaterial2D normalMa;
@@ -30,14 +31,16 @@ public class Move : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Footcollider.sharedMaterial = normalMa;
+        rb.gravityScale = 6f;
     }
 
     // Update is called once per frame
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
-        
-        if(jumpSpeed == 0.0f && isGrounded)
+        animator.SetBool("IsJumping", !isGrounded);
+        animator.SetFloat("yVelocity", rb.velocity.y);
+        if (jumpSpeed == 0.0f && isGrounded)
         {
             
            CheckFacingDirection(moveInput);
@@ -60,25 +63,29 @@ public class Move : MonoBehaviour
 
 
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.72f),
-            new Vector2(1.12f, 0.30f), 0f, groundMask);
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
+            , new Vector2(1.1f, 0.05f), 0f, groundMask);
 
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
             jumpSpeed += Time.deltaTime * 60f;
-            isJumping = true;
+            animator.SetBool("IsRecharge", true);
+           
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f,rb.velocity.y);
+            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+
         }
 
         if (jumpSpeed >= 27f && isGrounded)
         {
             float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
-            Invoke("jumpStatus", 0.1f);
+            
+            animator.SetBool("IsRecharge", false);
             rb.velocity = new Vector2(tempx, tempy);
             canJump = false;
         }
@@ -88,8 +95,8 @@ public class Move : MonoBehaviour
             if (isGrounded)
             {
                 rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
-                Invoke("jumpStatus", 0.1f);
-
+                
+                animator.SetBool("IsRecharge", false);
 
             }
             canJump = true;
@@ -98,10 +105,7 @@ public class Move : MonoBehaviour
 
     }
 
-    private void jumpStatus()
-    {
-        isJumping = false;
-    }
+
 
     private void LateUpdate()
     {
@@ -118,17 +122,13 @@ public class Move : MonoBehaviour
         }
     }
 
-/*    void resetJump()
-    {
 
-        canJump = false;
-    }*/
 
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.72f), new Vector2(1.12f, 0.20f));
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), new Vector2(1.1f, 0.05f));
     }
 
     private void CheckFacingDirection(float horizontalInput)
