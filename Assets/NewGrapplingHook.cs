@@ -171,7 +171,6 @@ public class NewGrapplingHook : MonoBehaviour
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
-        m_rigidbody.gravityScale = 1;
     }
     private void OnDrawGizmosSelected()
     {

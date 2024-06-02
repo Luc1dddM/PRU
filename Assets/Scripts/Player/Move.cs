@@ -23,6 +23,7 @@ public class Move : MonoBehaviour
     {
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 6f;
     }
 
     // Update is called once per frame
@@ -51,7 +52,7 @@ public class Move : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
 
-        if (jumpSpeed >= 30f && isGrounded)
+        if (jumpSpeed >= 27f && isGrounded)
         {
             float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
