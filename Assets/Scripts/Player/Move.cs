@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
 
     public float walkSpeed = 8f;
     public float jumpSpeed = 0.0f;
+
     public float jumpDistance = 2f;
     public bool isGrounded;
     public LayerMask groundMask;
@@ -16,6 +17,7 @@ public class Move : MonoBehaviour
     public Collider2D Footcollider;
     public PhysicsMaterial2D normalMa;
     public PhysicsMaterial2D bounceMa;
+
 
 
     private float moveInput;
@@ -41,7 +43,6 @@ public class Move : MonoBehaviour
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
-
             CheckFacingDirection(moveInput);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
@@ -69,7 +70,6 @@ public class Move : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
             jumpSpeed += Time.deltaTime * 60f;
-
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
@@ -97,8 +97,6 @@ public class Move : MonoBehaviour
             }
             canJump = true;
         }
-
-
     }
 
 
@@ -149,5 +147,36 @@ public class Move : MonoBehaviour
         facingRight = !facingRight;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enter"))
+        {
+            // Store the current velocity before transitioning
+            SceneController.Instance.playerVelocity = rb.velocity;
+            float height = 2f * Camera.main.orthographicSize;
+            Vector3 currentPosition = rb.position;
+            Vector3 sceneSize = new Vector3(0, height - 15f, 0);
+            SceneController.Instance.LoadScene("SampleScene", currentPosition, sceneSize);
+        }
+        else if (collision.CompareTag("Exit"))
+        {
+            // Store the current velocity before transitioning
+            SceneController.Instance.playerVelocity = rb.velocity;
+            float height = 2f * Camera.main.orthographicSize;
+            Vector3 currentPosition = rb.position;
+            Vector3 sceneSize = new Vector3(0, height - 17f, 0);
+            Debug.Log(sceneSize);
+            SceneController.Instance.LoadScene("RuinsMap1", currentPosition, sceneSize);
+        }
+    }
 
+    // OnCollisionEnter2D is called when this object collides with another object
+/*    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the player collides with a ground object (e.g., platform, floor)
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            jumpSpeed = 0.0f;
+        }
+    }*/
 }
