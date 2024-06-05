@@ -2898,17 +2898,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5771585653337819058, guid: 9e98549e8192d6445aa32bee97702238, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6160295491819442124, guid: 9e98549e8192d6445aa32bee97702238, type: 3}
       propertyPath: m_Name
       value: Launcher
       objectReference: {fileID: 0}
     - target: {fileID: 8468623579691265749, guid: 9e98549e8192d6445aa32bee97702238, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.86
+      value: -7.33
       objectReference: {fileID: 0}
     - target: {fileID: 8468623579691265749, guid: 9e98549e8192d6445aa32bee97702238, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.44
+      value: -4.21
       objectReference: {fileID: 0}
     - target: {fileID: 8468623579691265749, guid: 9e98549e8192d6445aa32bee97702238, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7865,11 +7869,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.43
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.27
+      value: -5.64
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.z

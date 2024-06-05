@@ -15,7 +15,7 @@ public class SceneController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        /*if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -23,7 +23,9 @@ public class SceneController : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }*/
+        Instance = this;
+
     }
 
     public void LoadNextScene(Vector3 currentPosition, Vector3 sceneSize)
@@ -51,6 +53,17 @@ public class SceneController : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene(backSceneIndex);
         }
+    }
+
+    public void LoadSpecificScene(int  sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void ReloadScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     private Vector3 TransformPosition(Vector3 currentPosition, Vector3 sceneSize)

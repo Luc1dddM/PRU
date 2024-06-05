@@ -32,11 +32,12 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        Debug.Log("testststst");
     }
 
     public void Home()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneController.Instance.LoadSpecificScene(0);
         isPaused = false;
     }
 
@@ -50,6 +51,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneController.Instance.LoadSpecificScene(1);
     }
 }
