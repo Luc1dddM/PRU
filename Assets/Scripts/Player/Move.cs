@@ -18,20 +18,6 @@ public class Move : MonoBehaviour
     public PhysicsMaterial2D normalMa;
     public PhysicsMaterial2D bounceMa;
 
-
-
-    public float jumpDistance = 2f;
-    public bool isGrounded;
-    public LayerMask groundMask;
-    public bool facingRight = true;
-    public bool canJump = true;
-    public Collider2D bodycollider;
-    public Collider2D Footcollider;
-    public PhysicsMaterial2D normalMa;
-    public PhysicsMaterial2D bounceMa;
-
-
-
     private float moveInput;
     private Rigidbody2D rb;
     private Animator animator;
@@ -73,14 +59,11 @@ public class Move : MonoBehaviour
             bodycollider.sharedMaterial = bounceMa;
         }
 
-
-
-
-
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
             , new Vector2(1.1f, 0.05f), 0f, groundMask);
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
+            CheckFacingDirection(moveInput);
             jumpSpeed += Time.deltaTime * 60f;
             animator.SetBool("IsRecharge", true);
         }
@@ -92,7 +75,7 @@ public class Move : MonoBehaviour
             canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
         }
 
-        if (jumpSpeed >= 27f && isGrounded)
+        if (jumpSpeed >= 30f && isGrounded)
         {
             float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
@@ -108,7 +91,7 @@ public class Move : MonoBehaviour
         {
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed              
+                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);        
                 animator.SetBool("IsRecharge", false);
                 canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
             }
@@ -166,24 +149,20 @@ public class Move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Store the current velocity before transitioning
+        SceneController.Instance.playerVelocity = rb.velocity;
+        float height = 2f * Camera.main.orthographicSize;
+        Vector3 currentPosition = rb.position;
         if (collision.CompareTag("Enter"))
         {
-            // Store the current velocity before transitioning
-            SceneController.Instance.playerVelocity = rb.velocity;
-            float height = 2f * Camera.main.orthographicSize;
-            Vector3 currentPosition = rb.position;
-            Vector3 sceneSize = new Vector3(0, height - 15f, 0);
-            SceneController.Instance.LoadScene("SampleScene", currentPosition, sceneSize);
+            Vector3 sceneSize = new Vector3(0, height - 14.5f, 0);
+            SceneController.Instance.LoadNextScene( currentPosition, sceneSize);
         }
         else if (collision.CompareTag("Exit"))
         {
             // Store the current velocity before transitioning
-            SceneController.Instance.playerVelocity = rb.velocity;
-            float height = 2f * Camera.main.orthographicSize;
-            Vector3 currentPosition = rb.position;
-            Vector3 sceneSize = new Vector3(0, height - 17f, 0);
-            Debug.Log(sceneSize);
-            SceneController.Instance.LoadScene("RuinsMap1", currentPosition, sceneSize);
+            Vector3 sceneSize = new Vector3(0, height - 17.5f, 0);
+            SceneController.Instance.LoadBackScene(currentPosition, sceneSize);
         }
     }
 

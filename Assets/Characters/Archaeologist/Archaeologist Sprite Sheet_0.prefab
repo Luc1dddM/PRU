@@ -15,9 +15,6 @@ GameObject:
   - component: {fileID: 5201720261474007372}
   - component: {fileID: 3913506253799497080}
   - component: {fileID: 145871263016344224}
-  - component: {fileID: 7092908670225236069}
-  - component: {fileID: 1824036565448810054}
-  - component: {fileID: 9012687869201382268}
   m_Layer: 0
   m_Name: Archaeologist Sprite Sheet_0
   m_TagString: Player
@@ -34,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 4420682815091927946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.61, y: -4.21, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.5, y: -4.51, z: 5}
+  m_LocalScale: {x: 11.558327, y: 8.707058, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -165,6 +162,7 @@ MonoBehaviour:
   Footcollider: {fileID: 145871263016344224}
   normalMa: {fileID: 6200000, guid: bd3f369c0aba22f4f8b803acd8271dd0, type: 2}
   bounceMa: {fileID: 6200000, guid: 715e290dad4b25c478bf89e6836d878e, type: 2}
+  canDoubleJump: 0
 --- !u!61 &3913506253799497080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,7 +195,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000055879354, y: 0.02277039}
+  m_Offset: {x: 0.000000055879354, y: 0.020843383}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -208,7 +206,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10062433, y: 0.1783174}
+  m_Size: {x: 0.10062433, y: 0.1821714}
   m_EdgeRadius: 0
 --- !u!61 &145871263016344224
 BoxCollider2D:
@@ -242,7 +240,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000930801, y: -0.07175067}
+  m_Offset: {x: 0.00003889762, y: -0.07175067}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -253,26 +251,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10081017, y: 0.0018950701}
+  m_Size: {x: 0.10001834, y: 0.0018950701}
   m_EdgeRadius: 0
---- !u!95 &9012687869201382268
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4420682815091927946}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dcee638edaa3eff4fa244d1e3ede369f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

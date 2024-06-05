@@ -4,36 +4,81 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D playerBody;
-    private Animator animator;
-    public float movementSpeed = 5f;
-    public bool facingRight = true;
-    public float jumpPower = 500f;
-    public PlayerGroundCollider playerGroundCollider;
+    public float walkSpeed = 8f;
+    public float jumpSpeed = 0.0f;
 
+    private float moveInput;
+    public bool isGrounded;
+    private Rigidbody2D rb;
+    public LayerMask groundMask;
+    private Animator animator;
+    public bool facingRight = true;
+
+    public bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerBody = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("movement", Mathf.Abs(playerBody.velocity.x));
-        animator.SetBool("isGrounded", playerGroundCollider.isGrounded);
+        moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (jumpSpeed == 0.0f && isGrounded)
+        {
+            CheckFacingDirection(moveInput);
+            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+
+        }
+
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.72f),
+            new Vector2(1.12f, 0.30f), 0f, groundMask);
+
+        if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
+        {
+            jumpSpeed += Time.deltaTime * 70f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
+        {
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
+
+        if (jumpSpeed >= 30f && isGrounded)
+        {
+            float tempx = moveInput * walkSpeed;
+            float tempy = jumpSpeed;
+            rb.velocity = new Vector2(tempx, tempy);
+            Invoke("resetJump", 0.1f);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if (isGrounded)
+            {
+                rb.velocity = new Vector2(moveInput * walkSpeed, jumpSpeed);
+                jumpSpeed = 0f;
+            }
+            canJump = true;
+        }
+
     }
 
-    public void Move(float horizontalInput)
+    void resetJump()
     {
-        if (horizontalInput != 0f)
-        {
-            CheckFacingDirection(horizontalInput);
-            float horizontalVelocity = horizontalInput * movementSpeed;
-            playerBody.velocity = new Vector2(horizontalVelocity, playerBody.velocity.y);
-        }
+
+        jumpSpeed = 0.0f;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.72f), new Vector2(1.12f, 0.20f));
     }
 
     private void CheckFacingDirection(float horizontalInput)
@@ -54,11 +99,22 @@ public class PlayerMovement : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    public void Jump()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (playerGroundCollider.isGrounded)
+        // Store the current velocity before transitioning
+        SceneController.Instance.playerVelocity = rb.velocity;
+        float height = 2f * Camera.main.orthographicSize;
+        Vector3 currentPosition = rb.position;
+        if (collision.CompareTag("Enter"))
         {
-            playerBody.AddForce(new Vector2(0f, jumpPower));
+            Vector3 sceneSize = new Vector3(0, height - 15f, 0);
+            SceneController.Instance.LoadNextScene(currentPosition, sceneSize);
+        }
+        else if (collision.CompareTag("Exit"))
+        {
+            // Store the current velocity before transitioning
+            Vector3 sceneSize = new Vector3(0, height - 17f, 0);
+            SceneController.Instance.LoadBackScene(currentPosition, sceneSize);
         }
     }
 }

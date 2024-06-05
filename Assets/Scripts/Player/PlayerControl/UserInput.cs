@@ -25,16 +25,4 @@ public class UserInput : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (horizontalInput != 0f)
-        {
-            playerMovement.Move(horizontalInput);
-        }
-        if (jumPressed)
-        {
-            playerMovement.Jump();
-            jumPressed = false;
-        }
-    }
 }
