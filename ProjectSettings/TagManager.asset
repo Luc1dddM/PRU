@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Exit
   - Enter
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
