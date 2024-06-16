@@ -147,25 +147,6 @@ public class Move : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Store the current velocity before transitioning
-        SceneController.Instance.playerVelocity = rb.velocity;
-        float height = 2f * Camera.main.orthographicSize;
-        Vector3 currentPosition = rb.position;
-        if (collision.CompareTag("Enter"))
-        {
-            Vector3 sceneSize = new Vector3(0, height - 14.5f, 0);
-            SceneController.Instance.LoadNextScene( currentPosition, sceneSize);
-        }
-        else if (collision.CompareTag("Exit"))
-        {
-            // Store the current velocity before transitioning
-            Vector3 sceneSize = new Vector3(0, height - 17.5f, 0);
-            SceneController.Instance.LoadBackScene(currentPosition, sceneSize);
-        }
-    }
-
     // OnCollisionEnter2D is called when this object collides with another object
 /*    private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -59,6 +59,7 @@ public class NewGrapplingHook : MonoBehaviour
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
 
+
     private void Start()
     {
         grappleRope.enabled = false;
@@ -71,7 +72,7 @@ public class NewGrapplingHook : MonoBehaviour
         {
             SetGrapplePoint();
         }
-        else if (Input.GetKey(KeyCode.Mouse0))
+        /*else if (Input.GetKey(KeyCode.Mouse0))
         {
             if (grappleRope.enabled)
             {
@@ -82,42 +83,36 @@ public class NewGrapplingHook : MonoBehaviour
                 Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
                 RotateGun(mousePos, true);
             }
-        }
+        }*/
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             StopGrappling();
         }
-        else
+        /*else
         {
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             RotateGun(mousePos, true);
-        }
+        }*/
     }
 
     void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
     {
         Vector3 distanceVector = lookPoint - gunPivot.position;
 
+        float angle;
         if (!playerMoving.facingRight)
         {
             distanceVector = -distanceVector;
         }
 
-        float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
 
-        if (rotateOverTime && allowRotationOverTime)
-        {
-            gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
-        }
-        else
-        {
-            gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
+        gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     void SetGrapplePoint()
     {
-        Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
+        Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
@@ -126,13 +121,13 @@ public class NewGrapplingHook : MonoBehaviour
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {
                     grapplePoint = _hit.point;
-                    grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
+                    grappleDistanceVector = grapplePoint - (Vector2)firePoint.position;
                     canGrappling = true;
                     grappleRope.enabled = true;
                 }
                 else
                 {
-                    grapplePoint = (Vector2)gunPivot.position + distanceVector.normalized * maxDistance;
+                    grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
                     grappleRope.enabled = true;
                     canGrappling = false;
                 }
@@ -140,7 +135,7 @@ public class NewGrapplingHook : MonoBehaviour
         }
         else
         {
-            grapplePoint = (Vector2)gunPivot.position + distanceVector.normalized * maxDistance;
+            grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
             grappleRope.enabled = true;
             canGrappling = false;
         }
