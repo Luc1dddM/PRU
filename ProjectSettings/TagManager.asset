@@ -8,6 +8,8 @@ TagManager:
   - Exit
   - Enter
   - FxTemporaire
+  - Rocket
+  - Shield
   layers:
   - Default
   - TransparentFX

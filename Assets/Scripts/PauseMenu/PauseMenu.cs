@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 Pause();
-                Debug.Log("Pause");
             }
         }
     }
@@ -32,13 +31,13 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-        Debug.Log("testststst");
     }
 
     public void Home()
     {
-        SceneController.Instance.LoadSpecificScene(0);
+        SceneController.instance.LoadMainMenu();
         isPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void Resume()
@@ -51,6 +50,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneController.Instance.LoadSpecificScene(1);
+        Time.timeScale = 1f;
+        isPaused = false;
+        SceneController.instance.LoadFirstScene();
     }
 }

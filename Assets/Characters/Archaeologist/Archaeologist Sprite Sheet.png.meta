@@ -113,10 +113,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 23
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 87
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 151
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 215
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_4
       rect:
         serializedVersion: 2
-        x: 256
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 279
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 343
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_6
       rect:
         serializedVersion: 2
-        x: 384
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 407
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_7
       rect:
         serializedVersion: 2
-        x: 448
-        y: 186.66667
-        width: 64
-        height: 37.333332
+        x: 471
+        y: 192
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 24
+        y: 160
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_9
       rect:
         serializedVersion: 2
-        x: 64
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 88
+        y: 163
+        width: 14
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,10 +323,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_10
       rect:
         serializedVersion: 2
-        x: 128
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 152
+        y: 165
+        width: 14
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,10 +344,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_11
       rect:
         serializedVersion: 2
-        x: 192
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 216
+        y: 163
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,10 +365,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_12
       rect:
         serializedVersion: 2
-        x: 256
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 280
+        y: 160
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -386,10 +386,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_13
       rect:
         serializedVersion: 2
-        x: 320
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 344
+        y: 163
+        width: 17
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_14
       rect:
         serializedVersion: 2
-        x: 384
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 408
+        y: 164
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,10 +428,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_15
       rect:
         serializedVersion: 2
-        x: 448
-        y: 149.66667
-        width: 64
-        height: 37.333332
+        x: 472
+        y: 163
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 23
+        y: 128
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,10 +470,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_17
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 85
+        y: 130
+        width: 22
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -491,10 +491,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_18
       rect:
         serializedVersion: 2
-        x: 128
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 149
+        y: 129
+        width: 22
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,10 +512,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_19
       rect:
         serializedVersion: 2
-        x: 192
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 212
+        y: 128
+        width: 23
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -533,10 +533,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_20
       rect:
         serializedVersion: 2
-        x: 256
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 278
+        y: 128
+        width: 21
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -554,10 +554,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_21
       rect:
         serializedVersion: 2
-        x: 320
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 343
+        y: 128
+        width: 16
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -575,10 +575,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_22
       rect:
         serializedVersion: 2
-        x: 384
-        y: 112.66667
-        width: 64
-        height: 37.333332
+        x: 407
+        y: 128
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -596,10 +596,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_23
       rect:
         serializedVersion: 2
-        x: 0
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 22
+        y: 96
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -617,10 +617,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_24
       rect:
         serializedVersion: 2
-        x: 64
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 86
+        y: 96
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -638,10 +638,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_25
       rect:
         serializedVersion: 2
-        x: 128
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 149
+        y: 96
+        width: 19
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -659,10 +659,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_26
       rect:
         serializedVersion: 2
-        x: 192
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 215
+        y: 96
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -680,10 +680,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_27
       rect:
         serializedVersion: 2
-        x: 256
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 279
+        y: 96
+        width: 18
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -701,10 +701,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_28
       rect:
         serializedVersion: 2
-        x: 320
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 343
+        y: 96
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -722,10 +722,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_29
       rect:
         serializedVersion: 2
-        x: 384
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 11
+        y: 64
+        width: 27
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -743,10 +743,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_30
       rect:
         serializedVersion: 2
-        x: 448
-        y: 75.66667
-        width: 64
-        height: 37.333332
+        x: 87
+        y: 64
+        width: 19
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -764,10 +764,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_31
       rect:
         serializedVersion: 2
-        x: 0
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 148
+        y: 64
+        width: 82
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -785,10 +785,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_32
       rect:
         serializedVersion: 2
-        x: 64
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 268
+        y: 64
+        width: 27
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -806,10 +806,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_33
       rect:
         serializedVersion: 2
-        x: 128
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 342
+        y: 64
+        width: 21
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -827,10 +827,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_34
       rect:
         serializedVersion: 2
-        x: 192
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 409
+        y: 64
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -848,10 +848,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_35
       rect:
         serializedVersion: 2
-        x: 256
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 472
+        y: 64
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -869,10 +869,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_36
       rect:
         serializedVersion: 2
-        x: 320
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 24
+        y: 32
+        width: 18
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -890,10 +890,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_37
       rect:
         serializedVersion: 2
-        x: 384
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 87
+        y: 32
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -911,10 +911,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_38
       rect:
         serializedVersion: 2
-        x: 448
-        y: 38.666668
-        width: 64
-        height: 37.333332
+        x: 152
+        y: 32
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -932,10 +932,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_39
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1.6666679
-        width: 64
-        height: 37.333332
+        x: 216
+        y: 32
+        width: 22
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -953,10 +953,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_40
       rect:
         serializedVersion: 2
-        x: 64
-        y: 1.6666679
-        width: 64
-        height: 37.333332
+        x: 23
+        y: 0
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -974,10 +974,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_41
       rect:
         serializedVersion: 2
-        x: 128
-        y: 1.6666679
-        width: 64
-        height: 37.333332
+        x: 87
+        y: 0
+        width: 21
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -995,10 +995,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_42
       rect:
         serializedVersion: 2
-        x: 192
-        y: 1.6666679
-        width: 64
-        height: 37.333332
+        x: 153
+        y: 0
+        width: 25
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1016,10 +1016,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_43
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1.6666679
-        width: 64
-        height: 37.333332
+        x: 217
+        y: 0
+        width: 25
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1029,6 +1029,27 @@ TextureImporter:
       bones: []
       spriteID: a1c27301191c9534bb5e68122899bb7c
       internalID: 1841999534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Archaeologist Sprite Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 0
+        width: 25
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad6892308403ad4498058ede6b6e5c47
+      internalID: 650108521
       vertices: []
       indices: 
       edges: []
@@ -1083,6 +1104,7 @@ TextureImporter:
       Archaeologist Sprite Sheet_41: 646921421
       Archaeologist Sprite Sheet_42: 1657762884
       Archaeologist Sprite Sheet_43: 1841999534
+      Archaeologist Sprite Sheet_44: 650108521
       Archaeologist Sprite Sheet_5: -365799748
       Archaeologist Sprite Sheet_6: 1444644042
       Archaeologist Sprite Sheet_7: 172099623

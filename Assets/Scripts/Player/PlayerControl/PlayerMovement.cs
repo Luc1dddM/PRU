@@ -99,22 +99,4 @@ public class PlayerMovement : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Store the current velocity before transitioning
-        SceneController.Instance.playerVelocity = rb.velocity;
-        float height = 2f * Camera.main.orthographicSize;
-        Vector3 currentPosition = rb.position;
-        if (collision.CompareTag("Enter"))
-        {
-            Vector3 sceneSize = new Vector3(0, height - 15f, 0);
-            SceneController.Instance.LoadNextScene(currentPosition, sceneSize);
-        }
-        else if (collision.CompareTag("Exit"))
-        {
-            // Store the current velocity before transitioning
-            Vector3 sceneSize = new Vector3(0, height - 17f, 0);
-            SceneController.Instance.LoadBackScene(currentPosition, sceneSize);
-        }
-    }
 }

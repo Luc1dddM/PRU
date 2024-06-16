@@ -26,7 +26,7 @@ public class Launcher : MonoBehaviour
         if (distance < 10)
         {
             timer += Time.deltaTime;
-            if (timer > 2)//after 5 secs 
+            if (timer > 5)//after 5 secs 
             {
                 timer = 0;//reset time
                 Shoot();

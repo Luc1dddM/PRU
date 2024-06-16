@@ -5,30 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public static SceneController Instance { get; private set; }
-
-
-    //Player infor to load new scene
-    public Vector3 playerPosition;
-    public float playerJumpSpeed;
-    public Vector2 playerVelocity;
+    public static SceneController instance { get; private set; }
 
     private void Awake()
     {
-        /*if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
-        }*/
-        Instance = this;
+        }
+        instance = this;
 
     }
 
-    public void LoadNextScene(Vector3 currentPosition, Vector3 sceneSize)
+    public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
@@ -36,53 +30,18 @@ public class SceneController : MonoBehaviour
         // Check if the next scene index is within the valid range
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            playerPosition = TransformPosition(currentPosition, sceneSize);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nextSceneIndex);
+            SceneManager.LoadSceneAsync(nextSceneIndex);
         }
+    } 
+
+
+    public void LoadMainMenu() {
+        SceneManager.LoadSceneAsync(0);    
     }
 
-    public void LoadBackScene(Vector3 currentPosition, Vector3 sceneSize)
+    public void LoadFirstScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int backSceneIndex = currentSceneIndex - 1;
-        // Check if the next scene index is within the valid range
-        if (backSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            playerPosition = TransformPosition(currentPosition, sceneSize);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(backSceneIndex);
-        }
-    }
+        SceneManager.LoadSceneAsync(1);
 
-    public void LoadSpecificScene(int  sceneIndex)
-    {
-        SceneManager.LoadScene(sceneIndex);
-    }
-
-    public void ReloadScene()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-
-    private Vector3 TransformPosition(Vector3 currentPosition, Vector3 sceneSize)
-    {
-        // transformation: bottom-left to top-left
-        return new Vector3(currentPosition.x, sceneSize.y - currentPosition.y, currentPosition.z);
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            player.transform.position = playerPosition;
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.velocity = playerVelocity;
-            }
-        }
     }
 }
