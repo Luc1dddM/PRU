@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
     public LayerMask groundMask;
     public bool facingRight = true;
     public bool canJump = true;
-   
+
     public Collider2D bodycollider;
     public Collider2D Footcollider;
     public PhysicsMaterial2D normalMa;
@@ -42,8 +42,8 @@ public class Move : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
         if (jumpSpeed == 0.0f && isGrounded)
         {
-            
-           CheckFacingDirection(moveInput);
+
+            CheckFacingDirection(moveInput);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
 
@@ -67,10 +67,10 @@ public class Move : MonoBehaviour
             jumpSpeed += Time.deltaTime * 60f;
             animator.SetBool("IsRecharge", true);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
-            rb.velocity = new Vector2(0.0f,rb.velocity.y);
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
         }
@@ -79,7 +79,7 @@ public class Move : MonoBehaviour
         {
             float tempx = moveInput * walkSpeed * jumpDistance;
             float tempy = jumpSpeed;
-            
+
             animator.SetBool("IsRecharge", false);
             rb.velocity = new Vector2(tempx, tempy);
             canJump = false;
@@ -91,7 +91,7 @@ public class Move : MonoBehaviour
         {
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);        
+                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
                 animator.SetBool("IsRecharge", false);
                 canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
             }
@@ -111,9 +111,9 @@ public class Move : MonoBehaviour
 
         }
         else
-    {
+        {
             canDoubleJump = false; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
-    }
+        }
         if (Input.GetKeyUp(KeyCode.Space))
         {
             canJump = true;
@@ -148,12 +148,12 @@ public class Move : MonoBehaviour
     }
 
     // OnCollisionEnter2D is called when this object collides with another object
-/*    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if the player collides with a ground object (e.g., platform, floor)
-        if (collision.gameObject.CompareTag("Ground"))
+    /*    private void OnCollisionEnter2D(Collision2D collision)
         {
-            jumpSpeed = 0.0f;
-        }
-    }*/
+            // Check if the player collides with a ground object (e.g., platform, floor)
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                jumpSpeed = 0.0f;
+            }
+        }*/
 }
