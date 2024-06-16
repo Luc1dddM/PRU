@@ -55,7 +55,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public void LoadSpecificScene(int  sceneIndex)
+    public void LoadSpecificScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }

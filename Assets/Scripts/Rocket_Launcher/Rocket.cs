@@ -13,7 +13,7 @@ public class Rocket : MonoBehaviour
     private float speed = 3f; //speed of the missile
     public float rotateSpeed = 100f; //speed rotate of missile
 
-    public float detonateTime;
+    public float detonateTime = 5f;
 
     Collider2D[] inExplosionRadius = null; //indicate any collider within explosion radius
     [SerializeField] private float ExplosionForceMulti = 300; //indicate how strong the force when hit other objects
@@ -27,6 +27,7 @@ public class Rocket : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(DetonateAfterTime(detonateTime));
     }
 
     // Update is called once per frame
@@ -54,10 +55,15 @@ public class Rocket : MonoBehaviour
             Destroy(gameObject);
 
         }
+        else if (collision.CompareTag("Shield"))
+        {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
     // explosion method 
-    void Explode()
+    public void Explode()
     {
         //determine if any collider intersect of fall within 
         inExplosionRadius = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
@@ -77,5 +83,16 @@ public class Rocket : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    // Coroutine to handle timed detonation
+    private IEnumerator DetonateAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Debug.Log("time to detonate is:" + time);
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+        Explode();
+        Destroy(gameObject);
     }
 }
