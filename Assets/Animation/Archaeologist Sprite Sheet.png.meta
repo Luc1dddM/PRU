@@ -596,10 +596,10 @@ TextureImporter:
       name: Archaeologist Sprite Sheet_23
       rect:
         serializedVersion: 2
-        x: 10
+        x: 22
         y: 96
-        width: 27
-        height: 27
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -619,7 +619,7 @@ TextureImporter:
         serializedVersion: 2
         x: 86
         y: 96
-        width: 32
+        width: 20
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -745,8 +745,8 @@ TextureImporter:
         serializedVersion: 2
         x: 87
         y: 64
-        width: 38
-        height: 21
+        width: 19
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

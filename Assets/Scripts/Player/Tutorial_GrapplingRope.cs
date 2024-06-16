@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tutorial_GrapplingRope : MonoBehaviour
@@ -7,6 +8,8 @@ public class Tutorial_GrapplingRope : MonoBehaviour
     [Header("General References:")]
     public NewGrapplingHook grapplingGun;
     public LineRenderer m_lineRenderer;
+    public Animator playerAnimator;
+
 
     [Header("General Settings:")]
     [SerializeField] private int percision = 40;
@@ -29,6 +32,7 @@ public class Tutorial_GrapplingRope : MonoBehaviour
 
     bool strightLine = true;
 
+
     private void OnEnable()
     {
         m_lineRenderer.sortingOrder = 4;
@@ -39,12 +43,15 @@ public class Tutorial_GrapplingRope : MonoBehaviour
         LinePointsToFirePoint();
         isGrappling = true;
         m_lineRenderer.enabled = true;
+        playerAnimator.SetBool("IsUsingRope", true);
     }
 
     private void OnDisable()
     {
         isGrappling = false;
         m_lineRenderer.enabled = false;
+        playerAnimator.SetBool("IsUsingRope", false);
+        playerAnimator.SetBool("IsGrappling", false);
     }
 
     private void LinePointsToFirePoint()
@@ -64,7 +71,6 @@ public class Tutorial_GrapplingRope : MonoBehaviour
 
         if (isGrappling)
         {
-           
             DrawRope();
         }
     }
@@ -119,6 +125,7 @@ public class Tutorial_GrapplingRope : MonoBehaviour
 
     void DrawRopeNoWaves()
     {
+        playerAnimator.SetBool("IsGrappling", true);
         m_lineRenderer.SetPosition(0, grapplingGun.firePoint.position);
         m_lineRenderer.SetPosition(1, grapplingGun.grapplePoint);
     }
