@@ -102,7 +102,7 @@ public class Freeze : MonoBehaviour
             {
                 Heal(10);
             }
-            yield return new WaitForSeconds(0.5f);// chờ 0.5s trước khi tăng
+            yield return new WaitForSeconds(0.5f); // chờ 0.5s trước khi tăng
         }
     }
     private IEnumerator TakeDame()
@@ -121,7 +121,7 @@ public class Freeze : MonoBehaviour
                     }
 
                     i++;
-                    TakeDamage(8); // thanh đóng băng tăng 10
+                    TakeDamage(8); // thanh đóng băng tăng 
                     yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
                 }
                 else

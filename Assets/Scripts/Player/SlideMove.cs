@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceMove : MonoBehaviour
+public class SlideMove : MonoBehaviour
 {
-    private bool isOnGroundIce = false; // Biến kiểm tra trạng thái
+    private bool isOnGroundIce = false; // kiểm tra trạng thái
     private bool stopSliding = false;
-    private float slideSpeed = 2f;
+    private float slideSpeed = 2f; // tốc độ trượt
     private float defaultSlideSpeed;
     private bool isJumpingLeft = false;
     private bool isJumpingRight = false;
