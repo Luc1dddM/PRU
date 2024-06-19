@@ -4498,6 +4498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87311431c93f91c41b6349ee523eb1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transAimt: {fileID: 0}
 --- !u!114 &1068113050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11759,11 +11760,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.7
+      value: 10.3
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.9
+      value: 25.9
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12337,6 +12338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5015225171202379390, guid: 29290b4c0747e9048a2abb9f723c2702, type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6219877601845113252, guid: 29290b4c0747e9048a2abb9f723c2702, type: 3}
       propertyPath: m_Name
       value: WindParticleSystem
@@ -12478,11 +12483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7575554875779944813, guid: 7167728f259f3b542aded4bb84ec7a41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.87
+      value: 11.8
       objectReference: {fileID: 0}
     - target: {fileID: 7575554875779944813, guid: 7167728f259f3b542aded4bb84ec7a41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.474
+      value: 24.8
       objectReference: {fileID: 0}
     - target: {fileID: 7575554875779944813, guid: 7167728f259f3b542aded4bb84ec7a41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12534,3 +12539,4 @@ SceneRoots:
   - {fileID: 5837707377107773902}
   - {fileID: 993495752399078035}
   - {fileID: 8778475271379673035}
+  - {fileID: 1068113048}

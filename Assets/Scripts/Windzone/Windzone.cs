@@ -5,7 +5,7 @@ using UnityEngine;
 public class Windzone : MonoBehaviour
 {
     public ParticleSystem leafParticleSystem; // Tham chiếu đến Particle System của lá
-    public float windForce = 8f; // Lực của gió
+    public float windForce = 5f; // Lực của gió
     public float changeDirectionInterval = 4f; // Thời gian giữa các lần đổi chiều
     public float slowDownDuration = 1f; // Thời gian chậm lại khi đổi chiều
 
@@ -22,10 +22,18 @@ public class Windzone : MonoBehaviour
     {
         if (other.attachedRigidbody != null)
         {
+            windForce+= Time.timeScale * 0.05f;
+            if (windForce > 8)
+            {
+                windForce = 8;
+            }
+            // Gọi hàm điều chỉnh lại Particle System
+            AdjustLeafParticleSystem();
             Move moveScript = other.GetComponent<Move>();
             if (moveScript != null && !moveScript.isGrounded) // Chỉ áp dụng lực gió khi không chạm đất
             {
                 other.attachedRigidbody.AddForce(windDirection * windForce);
+               
             }
         }
     }
@@ -38,10 +46,8 @@ public class Windzone : MonoBehaviour
 
             // Đổi chiều gió
             windDirection = -windDirection;
+            windForce = 0;
 
-
-            // Gọi hàm điều chỉnh lại Particle System
-            AdjustLeafParticleSystem();
 
             // Đợi một chút để gió đổi chiều
             yield return new WaitForSeconds(0.1f);
