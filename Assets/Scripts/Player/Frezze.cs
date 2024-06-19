@@ -115,7 +115,7 @@ public class Frezze : MonoBehaviour
                 if (cloth.cloth == false)
                 {
                     TakeDamage(8); // thanh đóng băng tăng 10
-                    yield return new WaitForSeconds(10f); // chờ 10s trước khi tăng
+                    yield return new WaitForSeconds(1f); // chờ 10s trước khi tăng
                 }
                 else
                 {
