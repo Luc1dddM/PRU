@@ -1,134 +1,131 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
-    [SerializeField] private float grappleLength;
-    [SerializeField] private LayerMask grappleLayer;
-    [SerializeField] private LineRenderer rope;
-    [SerializeField] private float ropeShootSpeed = 5f; // Tốc độ để dây xuất hiện
+    [Header("Scripts Ref:")]
+    public Tutorial_GrapplingRope grappleRope;
+    public Move playerMoving;
 
-    private Vector3 grapplePosition;
-    private DistanceJoint2D distanceJoint;
-    public bool isGrappling = false;
-    private bool isRenderLine = false;
 
-    void Start()
+    [Header("Object Ref:")]
+    public GameObject Player;
+
+    [Header("Layers Settings:")]
+    [SerializeField] private bool grappleToAll = false;
+    [SerializeField] private int grappableLayerNumber = 9;
+
+    [Header("Main Camera:")]
+    public Camera m_camera;
+
+    [Header("Transform Ref:")]
+    public Transform gunHolder;
+    public Transform gunPivot;
+    public Transform firePoint;
+
+    [Header("Physics Ref:")]
+    public DistanceJoint2D m_springJoint2D;
+    public Rigidbody2D m_rigidbody;
+
+    [Header("Rotation:")]
+    [SerializeField] private bool rotateOverTime = true;
+    [Range(0, 60)][SerializeField] private float rotationSpeed = 4;
+
+    [Header("Distance:")]
+    [SerializeField] private bool hasMaxDistance = false;
+    [SerializeField] private float maxDistance = 20;
+
+    [Header("Grappling State:")]
+    public bool canGrappling = false;
+
+    [Header("No Launch To Point")]
+    [SerializeField] private bool autoConfigureDistance = false;
+    [SerializeField] private float targetDistance = 3;
+    [SerializeField] private float targetFrequncy = 1;
+
+    [HideInInspector] public Vector2 grapplePoint;
+    [HideInInspector] public Vector2 grappleDistanceVector;
+
+    public bool activeGrappling;
+
+
+    private void Start()
     {
-        distanceJoint = gameObject.GetComponent<DistanceJoint2D>();
-        distanceJoint.enabled = false;
-        rope.enabled = false;
+        grappleRope.enabled = false;
+        m_springJoint2D.enabled = false;
+        activeGrappling = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isGrappling)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);   //Get position of mouse click
-            //Setup RayCast 
-            RaycastHit2D hit = Physics2D.Raycast(
-                origin: mouseWorldPosition,
-                direction: Vector2.zero,
-                distance: Mathf.Infinity,
-                layerMask: grappleLayer
-            );
-
-            grapplePosition = hit.point;
-            grapplePosition.z = 0f;
-
-            //Call Shoot Rope func
-            StartCoroutine(ShootRope(hit));
+            SetGrapplePoint();
         }
-
-        //Stop grappling
-        if (Input.GetMouseButtonUp(0) && isGrappling)
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            distanceJoint.enabled = false;
-            rope.enabled = false;
-            isGrappling = false;
+            StopGrappling();
         }
-
-        if (rope.enabled)
-        {
-            rope.SetPosition(1, transform.position);
-        }
+       
     }
 
-    //Function to render rope and grapple
-    private IEnumerator ShootRope(RaycastHit2D hit)
+    void SetGrapplePoint()
     {
-        //Start render line
-        isRenderLine = true;
-        float distance = Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        float time = distance / ropeShootSpeed;
-        float elapsedTime = 0f;
-
-        if(distance > grappleLength)
+        Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
+        if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
-            grapplePosition = CalculatePointC(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position , grappleLength);
+            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
+            if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
+            {
+                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
+                {
+                    grapplePoint = _hit.point;
+                    grappleDistanceVector = grapplePoint - (Vector2)firePoint.position;
+                    canGrappling = true;
+                    grappleRope.enabled = true;
+                }
+                else
+                {
+                    grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
+                    grappleRope.enabled = true;
+                    canGrappling = false;
+                }
+            }
         }
         else
         {
-            grapplePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        while (elapsedTime < time)
-        {
-            rope.enabled = true;
-
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / time;
-
-            // Từ từ di chuyển điểm đầu của dây từ vị trí của người chơi đến vị trí grapple
-            Vector3 currentRopePosition = Vector3.Lerp(transform.position, grapplePosition, t);
-            rope.SetPosition(1, transform.position); // Luôn đặt điểm 1 ở vị trí của nhân vật
-            rope.SetPosition(0, currentRopePosition); // Di chuyển điểm 0 từ nhân vật đến vật thể
-
-            yield return null;
-        }
-        isRenderLine = false;
-
-        if(hit.collider != null && (grappleLength >= distance))
-        {
-            isGrappling = true;
-
-            //Make sure position of rope (where rope stick to object) is right after render
-            rope.SetPosition(0, grapplePosition);
-
-            // Enable Distance joint to grapple
-            distanceJoint.enabled = true;
-            distanceJoint.connectedAnchor = grapplePosition;
-            distanceJoint.distance = grappleLength;
-        }
-        else
-        {
-            rope.enabled = false;
+            grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
+            grappleRope.enabled = true;
+            canGrappling = false;
         }
     }
 
-
-    //Stop grapple when hit an object
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Grapple()
     {
-        distanceJoint.enabled = false;
-        rope.enabled = false;
+        m_springJoint2D.autoConfigureDistance = false;
+
+        if (autoConfigureDistance)
+        {
+            m_springJoint2D.autoConfigureDistance = true;
+        }
+
+        m_springJoint2D.connectedAnchor = grapplePoint;
+        m_springJoint2D.enabled = true;
     }
 
-    Vector3 CalculatePointC(Vector3 A, Vector3 B, float distance)
+    public void StopGrappling()
     {
-        // Bước 1: Tính toán vector hướng từ B đến A
-        Vector3 direction = A - B;
-
-        // Bước 2: Chuẩn hóa vector hướng để có vector đơn vị
-        Vector3 unitDirection = direction.normalized;
-
-        // Bước 3: Nhân vector đơn vị với khoảng cách mong muốn
-        Vector3 offset = unitDirection * distance;
-
-        // Bước 4: Trừ vector này từ B để lấy điểm C
-        Vector3 C = B + offset;
-
-        return C;
+        grappleRope.enabled = false;
+        m_springJoint2D.enabled = false;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (firePoint != null && hasMaxDistance)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(firePoint.position, maxDistance);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance { get; private set; }
+    [SerializeField] Animator transAimt;
 
     private void Awake()
     {
@@ -24,14 +25,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadNextScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        // Check if the next scene index is within the valid range
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadSceneAsync(nextSceneIndex);
-        }
+        StartCoroutine(LoadNewScene());
     } 
 
 
@@ -42,6 +36,17 @@ public class SceneController : MonoBehaviour
     public void LoadFirstScene()
     {
         SceneManager.LoadSceneAsync(1);
+
+    }
+
+    IEnumerator LoadNewScene()
+    {
+
+        transAimt.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        // Check if the next scene index is within the valid range
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        transAimt.SetTrigger("Start");
 
     }
 }

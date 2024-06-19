@@ -5,17 +5,13 @@ using UnityEngine;
 
 public class WhiteHole : MonoBehaviour
 {
+    [SerializeField]
     private GameObject player;
     public float intensity;
-    public float range;
     public float distanceBtPlayer;
     Vector2 pullForce;
     // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
+   
     private void Update()
     {
         distanceBtPlayer = Vector2.Distance(player.transform.position, transform.position); ;
@@ -27,7 +23,7 @@ public class WhiteHole : MonoBehaviour
 
             Vector2 direction = player.transform.position - transform.position;
             direction.Normalize();
-            rb.AddForce(direction * 1f);
+            rb.AddForce(direction * 5f, ForceMode2D.Force);
         }
         
     }

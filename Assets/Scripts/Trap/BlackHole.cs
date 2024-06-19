@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlackHole : MonoBehaviour
 {
     [Header("Scripts Ref:")]
-    public NewGrapplingHook grapplingGun;
+    public GrapplingHook grapplingGun;
     public GameObject whiteHole;
     private GameObject player;
     public float intensity;

@@ -12,6 +12,7 @@ public class doublejump : MonoBehaviour
     // Thêm biến cho vận tốc nhảy boost
     public float boostJumpSpeed = 15f; // Đặt giá trị mặc định cho vận tốc nhảy boost
     private bool canDoubleJump;
+    private bool canActivateDoubleJump;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class doublejump : MonoBehaviour
         moveScript = gameObject.GetComponent<Move>();
         doubleJumpParticle = gameObject.GetComponentInChildren<ParticleSystem>(); // Lấy component ParticleSystem
         canDoubleJump = false; // Ban đầu không cho phép nhảy đôi
+        canActivateDoubleJump = false; //cannot active doublejump when player does not collect item
 
         // Điều chỉnh số lượng hạt phát ra
         var emission = doubleJumpParticle.emission;
@@ -30,7 +32,7 @@ public class doublejump : MonoBehaviour
     void Update()
     {
         // Kiểm tra điều kiện để thực hiện nhảy đôi
-        if (Input.GetKeyDown(KeyCode.Space) && !moveScript.isGrounded && canDoubleJump)
+        if (Input.GetKeyDown(KeyCode.Space) && !moveScript.isGrounded && canDoubleJump && canActivateDoubleJump)
         {
             // Thực hiện nhảy boost với vận tốc boostJumpSpeed
             rb.velocity = new Vector2(rb.velocity.x, boostJumpSpeed);
@@ -42,7 +44,7 @@ public class doublejump : MonoBehaviour
         }
 
         // Reset lại khi nhân vật chạm đất
-        if (moveScript.isGrounded)
+        if (moveScript.isGrounded && canActivateDoubleJump)
         {
             canDoubleJump = true; // Cho phép nhảy đôi khi chạm đất
 
@@ -51,6 +53,11 @@ public class doublejump : MonoBehaviour
         }
     }
 
+    // Method to enable shield functionality
+    public void EnableDoubleJump()
+    {
+        canActivateDoubleJump = true;
+    }
     private void StopAndClearParticleSystem(ParticleSystem ps)
     {
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
