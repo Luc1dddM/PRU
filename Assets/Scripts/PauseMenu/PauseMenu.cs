@@ -50,9 +50,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("test");
         Time.timeScale = 1f;
         isPaused = false;
-        SceneController.instance.LoadNextScene();
+        SceneController.instance.LoadFirstScene();
     }
 }

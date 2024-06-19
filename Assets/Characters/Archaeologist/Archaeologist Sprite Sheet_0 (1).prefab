@@ -165,6 +165,7 @@ MonoBehaviour:
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
+  activeGrappling: 0
 --- !u!1 &2639550642514672125
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +590,7 @@ GameObject:
   - component: {fileID: 1262528443315296754}
   - component: {fileID: 8441068089875522972}
   - component: {fileID: 5143901156972274382}
+  - component: {fileID: 1140077375735234667}
   - component: {fileID: 1543619534320326781}
   - component: {fileID: 7692532798320707990}
   - component: {fileID: 3973848605851845481}
@@ -716,6 +718,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1140077375735234667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994313641994966513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb06e0f76c399bb42ad968df9551a353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grapplingGunScript: {fileID: 5401344036597846450}
+  grapplingGun: {fileID: 2471903313582805602}
 --- !u!114 &1543619534320326781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,5 +866,5 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 10.7823
+  m_Distance: 70.56623
   m_MaxDistanceOnly: 0
