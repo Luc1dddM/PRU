@@ -44,15 +44,8 @@ public class SceneController : MonoBehaviour
 
         transAimt.SetTrigger("End");
         yield return new WaitForSeconds(1);
-
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        Debug.Log(nextSceneIndex < SceneManager.sceneCountInBuildSettings);
         // Check if the next scene index is within the valid range
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadSceneAsync(nextSceneIndex);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         transAimt.SetTrigger("Start");
 
     }
