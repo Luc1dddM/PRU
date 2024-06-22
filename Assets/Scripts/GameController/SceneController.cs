@@ -39,9 +39,13 @@ public class SceneController : MonoBehaviour
 
     }
 
+    public void LoadSavedScene()
+    {
+        SceneManager.LoadSceneAsync(DataActionManager.instance.GetSavedSceneIndex());
+    }
+
     IEnumerator LoadNewScene()
     {
-
         transAimt.SetTrigger("End");
         yield return new WaitForSeconds(1);
         // Check if the next scene index is within the valid range

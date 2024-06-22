@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject restartConfirm;
+
     // Start is called before the first frame update
     private static bool isPaused = false;
 
@@ -48,8 +50,20 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
+    public void ConfirmRestart()
+    {
+        restartConfirm.SetActive(true);
+    }
+
+    public void CancelRestart()
+    {
+        restartConfirm.SetActive(false);
+    }
+
     public void Restart()
     {
+        restartConfirm.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         SceneController.instance.LoadFirstScene();

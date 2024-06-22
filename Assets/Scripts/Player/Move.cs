@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class Move : MonoBehaviour, IDataAction
 {
 
     public float walkSpeed = 8f;
@@ -145,6 +145,16 @@ public class Move : MonoBehaviour
         var playerScale = transform.localScale;
         transform.localScale = new Vector3(playerScale.x * -1, playerScale.y, playerScale.z);
         facingRight = !facingRight;
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        gameObject.transform.position = gameData.playerPosition;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.playerPosition = this.transform.position;
     }
 
     // OnCollisionEnter2D is called when this object collides with another object
