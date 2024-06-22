@@ -13,6 +13,9 @@ TagManager:
   - Fire
   - Cloth
   - Ice
+  - Key
+  - Coin
+  - Gate
   layers:
   - Default
   - TransparentFX

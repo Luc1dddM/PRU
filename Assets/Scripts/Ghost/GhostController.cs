@@ -12,6 +12,7 @@ public class GhostController : MonoBehaviour
     public BoxCollider2D trigger;
 
     private SpriteRenderer spriteRenderer;
+    private bool isStand;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class GhostController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (patroDestination == 0 && patrolPoint.Count()>0)
+        if (patroDestination == 0 && patrolPoint.Count() > 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, patrolPoint[0].position, moveSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, patrolPoint[0].position) < .2f)
@@ -47,8 +48,32 @@ public class GhostController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            StartCoroutine(StandTiming());
+
+
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Standing");
             StartCoroutine(GhostTiming());
 
+        }
+    }
+
+    private IEnumerator StandTiming()
+    {
+        isStand = false;
+        stand.enabled = true; // appear a edge collider to stand
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(1);
+        if (!isStand)
+        {
+            stand.enabled = false;// disappear a edge collider to stand
+            Debug.Log("Stand Appear");
 
         }
     }
@@ -56,7 +81,7 @@ public class GhostController : MonoBehaviour
     private IEnumerator GhostTiming()
     {
         var tmp = spriteRenderer.color;
-
+        isStand = true;
         //Execute when the function is first called.
         stand.enabled = true; // appear a edge collider to stand
         trigger.enabled = false;//disappear the trigger 
@@ -67,6 +92,8 @@ public class GhostController : MonoBehaviour
         //After we have waited 5 seconds execute this.
         stand.enabled = false;// disappear a edge collider to stand
         spriteRenderer.color = Color.clear;// make the ghost become clear
+        isStand = false;
+
         Debug.Log(stand.enabled);
 
         //After we have waited 5 seconds execute this.
