@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class IceCloth : MonoBehaviour
 {
     
-    private Frezze frezze;
+    private Freeze frezze;
     public bool cloth = true;
     private void Awake()
     {
-        frezze = GetComponent<Frezze>();
+        frezze = GetComponent<Freeze>();
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

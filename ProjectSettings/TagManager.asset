@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Fire
   - Cloth
+  - Ice
   layers:
   - Default
   - TransparentFX
