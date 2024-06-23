@@ -18,8 +18,15 @@ public class Rocket : MonoBehaviour
     Collider2D[] inExplosionRadius = null; //indicate any collider within explosion radius
     [SerializeField] private float ExplosionForceMulti = 300; //indicate how strong the force when hit other objects
     [SerializeField] private float ExplosionRadius = 4; //explode radius can affect
+    AudioManager audioManager;
 
     // Variable declaration end-------------------------------------------------------------------
+
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
 
     // Start is called before the first frame update
@@ -51,6 +58,7 @@ public class Rocket : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Instantiate(explosionEffect, transform.position, transform.rotation);
+            audioManager.PlaySFX(audioManager.rocketExplosion);
             Explode();
             Destroy(gameObject);
 

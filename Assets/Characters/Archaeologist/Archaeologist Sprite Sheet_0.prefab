@@ -178,11 +178,10 @@ GameObject:
   - component: {fileID: 5788828779469691553}
   - component: {fileID: 711609549801513290}
   - component: {fileID: 8198375237377109377}
+  - component: {fileID: 894111136922484356}
   - component: {fileID: 5201720261474007372}
   - component: {fileID: 3913506253799497080}
   - component: {fileID: 145871263016344224}
-  - component: {fileID: 3396966462779975514}
-  - component: {fileID: 894111136922484356}
   m_Layer: 0
   m_Name: Archaeologist Sprite Sheet_0
   m_TagString: Player
@@ -307,6 +306,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &894111136922484356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4420682815091927946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e815dbc1a1affdc4eaeff6803f341d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: {fileID: 539942034384475439}
+  canActivateShield: 0
 --- !u!114 &5201720261474007372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,33 +436,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.10001834, y: 0.0018950701}
   m_EdgeRadius: 0
---- !u!114 &3396966462779975514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4420682815091927946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 897493ac76b07cc48a09d319fd82e441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveScript: {fileID: 5201720261474007372}
-  boostJumpSpeed: 15
---- !u!114 &894111136922484356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4420682815091927946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e815dbc1a1affdc4eaeff6803f341d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shield: {fileID: 539942034384475439}
 --- !u!1 &6056424451561101068
 GameObject:
   m_ObjectHideFlags: 0

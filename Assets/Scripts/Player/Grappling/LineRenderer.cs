@@ -35,7 +35,7 @@ public class Tutorial_GrapplingRope : MonoBehaviour
 
     private void OnEnable()
     {
-        m_lineRenderer.sortingOrder = 4;
+        m_lineRenderer.sortingOrder = 200;
         moveTime = 0;
         m_lineRenderer.positionCount = percision;
         waveSize = StartWaveSize;

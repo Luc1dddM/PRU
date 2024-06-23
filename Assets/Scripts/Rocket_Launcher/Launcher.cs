@@ -10,7 +10,16 @@ public class Launcher : MonoBehaviour
     public Transform missileInitiatePos;
 
     private float timer; //control missile frequency spawn
+
+    AudioManager audioManager;
+
     // Variable declaration end-------------------------------------------------------------------
+
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +47,6 @@ public class Launcher : MonoBehaviour
     void Shoot()
     {
         Instantiate(missile, missileInitiatePos.position, Quaternion.identity);
+        audioManager.PlaySFX(audioManager.laucher);
     }
 }

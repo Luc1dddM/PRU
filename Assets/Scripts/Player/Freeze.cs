@@ -16,51 +16,58 @@ public class Freeze : MonoBehaviour
 
     private Animator animator;
     private Move move;
-    private IceCloth cloth;
+    private bool cloth = true;
+    private SlideMove slideMove;
+    private bool isFreezeSoundPlayed = false;
+    AudioManager audioManager;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         move = GetComponent<Move>();
-        cloth = GetComponent<IceCloth>();
+        slideMove = GetComponent<SlideMove>();
         spriteRenderer.sprite = normalSprite;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Start()
     {
         // Start the health adjustment coroutine
-        StartCoroutine(AdjustHealth()); 
+        StartCoroutine(AdjustHealth());
         StartCoroutine(TakeDame());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (healthAmount == 0)
+        if (healthAmount == 0 && !isFreezeSoundPlayed)
         {
             spriteRenderer.sprite = skatingSprite;
             move.enabled = false;
             animator.enabled = false;
+            audioManager.PlaySFX(audioManager.freeze);
+            isFreezeSoundPlayed = true; // Đánh dấu là âm thanh freeze đã được phát
+            slideMove.enabled = false;
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Heal(8); // click chuột để phá băng, giảm 8
-        }
-
-        if (spriteRenderer.sprite == skatingSprite)
-        {
-            /*if (Input.GetMouseButtonDown(0)) 
+        if (spriteRenderer.sprite == skatingSprite) {
+            if (Input.GetMouseButtonDown(0))
             {
-                Heal(8);
-            }*/
+                audioManager.PlaySFX(audioManager.mealtingclick);
+                Heal(8); // click chuột để phá băng, giảm 8
+            }
+        }
 
-            if (healthAmount == 100) {
+
+        if (spriteRenderer.sprite == skatingSprite && healthAmount == 100)
+        {
                 spriteRenderer.sprite = normalSprite; //Trở lại hình ảnh bình thường
                 move.enabled = true;
                 animator.enabled = true;
-            }
+                audioManager.PlaySFX(audioManager.crackingIce);
+                isFreezeSoundPlayed = false; // Đặt lại trạng thái của biến isFreezeSoundPlayed
+                slideMove.enabled = true;
+
         }
     }
 
@@ -106,35 +113,41 @@ public class Freeze : MonoBehaviour
         }
     }
     private IEnumerator TakeDame()
-    {
-        int i = 0;
+    {    
         while (true)
         {
             if (healthAmount >= 0 && !isFire)
             {
                 // sau khi lấy item
-                if (cloth.cloth == false)
+                if (cloth == false)
                 {
-                    if(i==0)
-                    {
-                        yield return new WaitForSeconds(1f);
-                    }
-
-                    i++;
-                    TakeDamage(8); // thanh đóng băng tăng 
                     yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
+                    TakeDamage(8); // thanh đóng băng tăng 
+                    
                 }
-                else
+                else if (cloth == true)
                 {
+                    yield return new WaitForSeconds(0.5f);
                     TakeDamage(10);
-                    yield return new WaitForSeconds(0.5f); 
+                  
                 }
             }
             else
             {
                 yield return null;
             }
-            
+
         }
     }
+   
+    public void ActiveCloth()
+    {
+        Heal(100);
+        cloth = false;
+        Debug.Log("Hi");
+        StopCoroutine(TakeDame());
+        StartCoroutine(TakeDame());
+
+    }
+
 }

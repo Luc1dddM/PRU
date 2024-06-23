@@ -58,10 +58,10 @@ GameObject:
   - component: {fileID: 958927859677645662}
   - component: {fileID: 6999109695577217368}
   - component: {fileID: 1708271318515241765}
+  - component: {fileID: 5141167996076133703}
   - component: {fileID: 5760634598181730202}
   - component: {fileID: 7605306871155659682}
   - component: {fileID: 4590894457384230116}
-  - component: {fileID: 5141167996076133703}
   m_Layer: 0
   m_Name: Archaeologist_Shield
   m_TagString: Player
@@ -185,6 +185,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5141167996076133703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093648368484101373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e815dbc1a1affdc4eaeff6803f341d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: {fileID: 8625467223721669254}
+  canActivateShield: 0
 --- !u!114 &5760634598181730202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +261,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.37333333}
+    oldSize: {x: 0.16, y: 0.22}
     newSize: {x: 0.64, y: 0.37333333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -292,7 +306,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.37333333}
+    oldSize: {x: 0.16, y: 0.22}
     newSize: {x: 0.64, y: 0.37333333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -301,19 +315,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.10001834, y: 0.0018950701}
   m_EdgeRadius: 0
---- !u!114 &5141167996076133703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093648368484101373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e815dbc1a1affdc4eaeff6803f341d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shield: {fileID: 8625467223721669254}
 --- !u!1 &8625467223721669254
 GameObject:
   m_ObjectHideFlags: 0

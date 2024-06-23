@@ -2,14 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCollect : MonoBehaviour
+public class ItemCollect : MonoBehaviour, IDataAction
 {
+
     public IItemCollection actionable;
     public MonoBehaviour actionScript;
+    private bool isCollected;
+    AudioManager audioManager;
 
-    public void Start()
+
+    [SerializeField] private string id;
+    [ContextMenu("Generate guid for id")]
+    private void GenerateGuid()
     {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         actionable = actionScript as IItemCollection;
+        isCollected = false;
         if (actionable == null)
         {
             Debug.LogError("The assigned script does not implement IActionable");
@@ -17,12 +30,31 @@ public class ItemCollect : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isCollected)
         {
-            /*collision.GetComponent<GrapplingController>().ActiveGrapplingGun();
-            Destroy(gameObject); */
+            audioManager.PlaySFX(audioManager.collectitem);
+            isCollected = true;
             actionable.activeItem();
             Destroy(gameObject);
         }
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        gameData.itemCollected.TryGetValue(id, out isCollected);
+        if(isCollected)
+        {
+            actionable.activeItem();
+            Destroy(gameObject);
+        }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        if (gameData.itemCollected.ContainsKey(id))
+        {
+            gameData.itemCollected.Remove(id);
+        }
+        gameData.itemCollected.Add(id, isCollected);
     }
 }

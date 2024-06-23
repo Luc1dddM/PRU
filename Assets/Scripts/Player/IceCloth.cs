@@ -3,22 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IceCloth : MonoBehaviour
+public class IceCloth : MonoBehaviour, IItemCollection
 {
-    
-    private Freeze frezze;
-    public bool cloth = true;
+    private Freeze freeze;
+    private bool canActiveCloth = false;
+
     private void Awake()
     {
-        frezze = GetComponent<Freeze>();
+        freeze = GetComponent<Freeze>();
     }
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void Update()
     {
-        if (collision.CompareTag("Cloth") ){
-            Destroy(collision.gameObject); // lấy được item, xóa item đó khỏi map
-            frezze.Heal(100);
-            cloth = false;
+        if (canActiveCloth)
+        {
+            ActiveCloth();
         }
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            frezze.ActiveCloth();
+            Destroy(gameObject);
+        }
+    }*/
+    public void ActiveCloth()
+    {
+        freeze.ActiveCloth();
+    }
+
+    public void activeItem()
+    {
+        freeze.ActiveCloth();
     }
 }
