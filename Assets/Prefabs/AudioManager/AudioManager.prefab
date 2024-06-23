@@ -547,3 +547,5 @@ MonoBehaviour:
   shieldbroken: {fileID: 8300000, guid: 4440ebd531fcbcb419464df95e747c23, type: 3}
   rocketExplosion: {fileID: 8300000, guid: 73bd4896aae202b48b8c9c2304a8882a, type: 3}
   laucher: {fileID: 8300000, guid: 572cc9ac0428b9f44b85c8a30350502a, type: 3}
+  collectcoin: {fileID: 8300000, guid: 81965cb55f0c9fa40a29bb872164c26b, type: 3}
+  changemapgate: {fileID: 8300000, guid: 82673f53357d3c24ba23e29af3952e4c, type: 3}

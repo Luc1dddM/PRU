@@ -129,10 +129,10 @@ public class DataActionManager : MonoBehaviour
     }
 
 
-    private void OnApplicationQuit()
+   /* private void OnApplicationQuit()
     {
         SaveGame();
-    }
+    }*/
 
 
 }
