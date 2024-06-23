@@ -16,7 +16,8 @@ public class Freeze : MonoBehaviour
 
     private Animator animator;
     private Move move;
-    private IceCloth cloth;
+    private bool cloth = true;
+    private SlideMove slideMove;
     private bool isFreezeSoundPlayed = false;
     AudioManager audioManager;
 
@@ -25,7 +26,7 @@ public class Freeze : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         move = GetComponent<Move>();
-        cloth = GetComponent<IceCloth>();
+        slideMove = GetComponent<SlideMove>();
         spriteRenderer.sprite = normalSprite;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
@@ -47,6 +48,7 @@ public class Freeze : MonoBehaviour
             animator.enabled = false;
             audioManager.PlaySFX(audioManager.freeze);
             isFreezeSoundPlayed = true; // Đánh dấu là âm thanh freeze đã được phát
+            slideMove.enabled = false;
         }
         if (spriteRenderer.sprite == skatingSprite) {
             if (Input.GetMouseButtonDown(0))
@@ -64,6 +66,7 @@ public class Freeze : MonoBehaviour
                 animator.enabled = true;
                 audioManager.PlaySFX(audioManager.crackingIce);
                 isFreezeSoundPlayed = false; // Đặt lại trạng thái của biến isFreezeSoundPlayed
+                slideMove.enabled = true;
 
         }
     }
@@ -110,28 +113,23 @@ public class Freeze : MonoBehaviour
         }
     }
     private IEnumerator TakeDame()
-    {
-        int i = 0;
+    {    
         while (true)
         {
             if (healthAmount >= 0 && !isFire)
             {
                 // sau khi lấy item
-                if (cloth.cloth == false)
+                if (cloth == false)
                 {
-                    if (i == 0)
-                    {
-                        yield return new WaitForSeconds(1f);
-                    }
-
-                    i++;
-                    TakeDamage(8); // thanh đóng băng tăng 
                     yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
+                    TakeDamage(8); // thanh đóng băng tăng 
+                    
                 }
-                else
+                else if (cloth == true)
                 {
-                    TakeDamage(10);
                     yield return new WaitForSeconds(0.5f);
+                    TakeDamage(10);
+                  
                 }
             }
             else
@@ -141,4 +139,15 @@ public class Freeze : MonoBehaviour
 
         }
     }
+   
+    public void ActiveCloth()
+    {
+        Heal(100);
+        cloth = false;
+        Debug.Log("Hi");
+        StopCoroutine(TakeDame());
+        StartCoroutine(TakeDame());
+
+    }
+
 }
