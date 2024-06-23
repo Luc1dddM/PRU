@@ -8,7 +8,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     // Start is called before the first frame update
     private static bool isPaused = false;
-
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void Start()
     {
     }
@@ -18,16 +22,19 @@ public class PauseMenu : MonoBehaviour
         {
             if (isPaused)
             {
+                audioManager.PlaySFX(audioManager.menuopen);
                 Resume();
             }
             else
             {
+                audioManager.PlaySFX(audioManager.menuopen);
                 Pause();
             }
         }
     }
     public void Pause()
     {
+        
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -35,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         SceneController.instance.LoadMainMenu();
         isPaused = false;
         Time.timeScale = 1f;
@@ -42,7 +50,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-
+        audioManager.PlaySFX(audioManager.buttonclick);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -50,6 +58,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         Time.timeScale = 1f;
         isPaused = false;
         SceneController.instance.LoadFirstScene();

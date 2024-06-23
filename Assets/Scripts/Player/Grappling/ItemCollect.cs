@@ -6,7 +6,11 @@ public class ItemCollect : MonoBehaviour
 {
     public IItemCollection actionable;
     public MonoBehaviour actionScript;
-
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     public void Start()
     {
         actionable = actionScript as IItemCollection;
@@ -21,6 +25,7 @@ public class ItemCollect : MonoBehaviour
         {
             /*collision.GetComponent<GrapplingController>().ActiveGrapplingGun();
             Destroy(gameObject); */
+            audioManager.PlaySFX(audioManager.collectitem);
             actionable.activeItem();
             Destroy(gameObject);
         }

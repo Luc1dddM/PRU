@@ -24,6 +24,15 @@ public class Move : MonoBehaviour
     public bool canDoubleJump; // kiểm tra trạng thái nhảy
 
 
+    AudioManager audioManager;
+    private bool isMoving;
+    private float airTime = 0f; // Thời gian ở trên không
+    private float minAirTime = 0.5f; // Thời gian tối thiểu trên không để phát âm thanh tiếp đất
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +49,20 @@ public class Move : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal");
         animator.SetBool("IsJumping", !isGrounded);
         animator.SetFloat("yVelocity", rb.velocity.y);
+
+
+        if (moveInput != 0 && !isMoving && jumpSpeed == 0.0f && isGrounded)
+        {
+            isMoving = true;
+            audioManager.PlayWalk(); // Phát âm thanh walk khi bắt đầu di chuyển
+        }
+        else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
+        {
+            isMoving = false;
+            audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
+        }
+
+
         if (jumpSpeed == 0.0f && isGrounded)
         {
 
@@ -53,10 +76,20 @@ public class Move : MonoBehaviour
         {
             bodycollider.sharedMaterial = normalMa;
             canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
+            if (airTime >= minAirTime)
+            {
+                audioManager.PlaySFX(audioManager.fall);
+            }
+
+            // Đặt lại thời gian trên không
+            airTime = 0f;
         }
         else
         {
             bodycollider.sharedMaterial = bounceMa;
+
+            // Tăng thời gian ở trên không
+            airTime += Time.deltaTime;
         }
 
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
@@ -66,13 +99,15 @@ public class Move : MonoBehaviour
             CheckFacingDirection(moveInput);
             jumpSpeed += Time.deltaTime * 60f;
             animator.SetBool("IsRecharge", true);
+            canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-            canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
+           
         }
 
         if (jumpSpeed >= 30f && isGrounded)
@@ -84,6 +119,7 @@ public class Move : MonoBehaviour
             rb.velocity = new Vector2(tempx, tempy);
             canJump = false;
             canDoubleJump = true; // Đặt trạng thái nhảy khi nhảy lên
+            audioManager.PlaySFX(audioManager.jump);
 
         }
 
@@ -94,8 +130,10 @@ public class Move : MonoBehaviour
                 rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
                 animator.SetBool("IsRecharge", false);
                 canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
+                audioManager.PlaySFX(audioManager.jump);
             }
             canJump = true;
+           
         }
     }
 
@@ -117,6 +155,7 @@ public class Move : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             canJump = true;
+
         }
     }
 

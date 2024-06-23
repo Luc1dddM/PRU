@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class doublejump : MonoBehaviour
+public class doublejump : MonoBehaviour, IItemCollection
 {
     private Rigidbody2D rb;
     [SerializeField] private Move moveScript;
-    private ParticleSystem doubleJumpParticle; // Thêm biến ParticleSystem
-
-    // Thêm biến cho vận tốc nhảy boost
-    public float boostJumpSpeed = 15f; // Đặt giá trị mặc định cho vận tốc nhảy boost
+    private ParticleSystem doubleJumpParticle; 
+    public float boostJumpSpeed = 18f; 
     private bool canDoubleJump;
     private bool canActivateDoubleJump;
+    AudioManager audioManager;
+    private bool isMoving;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         moveScript = gameObject.GetComponent<Move>();
-        doubleJumpParticle = gameObject.GetComponentInChildren<ParticleSystem>(); // Lấy component ParticleSystem
+        doubleJumpParticle = gameObject.GetComponentInChildren<ParticleSystem>();
         canDoubleJump = false; // Ban đầu không cho phép nhảy đôi
         canActivateDoubleJump = false; //cannot active doublejump when player does not collect item
 
@@ -31,35 +36,39 @@ public class doublejump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Kiểm tra điều kiện để thực hiện nhảy đôi
-        if (Input.GetKeyDown(KeyCode.Space) && !moveScript.isGrounded && canDoubleJump && canActivateDoubleJump)
+        if (canActivateDoubleJump)
         {
-            // Thực hiện nhảy boost với vận tốc boostJumpSpeed
-            rb.velocity = new Vector2(rb.velocity.x, boostJumpSpeed);
+            if (Input.GetKeyDown(KeyCode.Space) && !moveScript.isGrounded && canDoubleJump && canActivateDoubleJump)
+            {
+                // Thực hiện nhảy boost với vận tốc boostJumpSpeed
+                rb.velocity = new Vector2(rb.velocity.x, boostJumpSpeed);
 
-            // Kích hoạt Particle System cho double jump
-            doubleJumpParticle.Play();
+                doubleJumpParticle.Play();
+                audioManager.PlaySFX(audioManager.doublejump);
+                canDoubleJump = false;
+            }
 
-            canDoubleJump = false; // Sau khi nhảy đôi, không cho phép nhảy đôi lần nữa
+            // Reset lại khi nhân vật chạm đất
+            if (moveScript.isGrounded)
+            {
+                canDoubleJump = true;
+
+                // Dừng Particle System ngay lập tức khi chạm đất
+                StopAndClearParticleSystem(doubleJumpParticle);
+            }
         }
 
-        // Reset lại khi nhân vật chạm đất
-        if (moveScript.isGrounded && canActivateDoubleJump)
-        {
-            canDoubleJump = true; // Cho phép nhảy đôi khi chạm đất
 
-            // Dừng Particle System ngay lập tức khi chạm đất
-            StopAndClearParticleSystem(doubleJumpParticle);
-        }
     }
 
     // Method to enable shield functionality
-    public void EnableDoubleJump()
-    {
-        canActivateDoubleJump = true;
-    }
     private void StopAndClearParticleSystem(ParticleSystem ps)
     {
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
+
+    public void activeItem()
+    {
+        canActivateDoubleJump = true;
     }
 }

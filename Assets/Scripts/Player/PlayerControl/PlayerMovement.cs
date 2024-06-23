@@ -16,6 +16,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canJump = true;
 
+    AudioManager audioManager;
+    private bool isMoving;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +34,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (moveInput != 0 && !isMoving)
+        {
+            isMoving = true;
+            audioManager.PlaySFX(audioManager.walk);
+            Debug.Log("Start moving");
+        }
+        else if (moveInput == 0 && isMoving)
+        {
+            isMoving = false;
+            Debug.Log("Stop moving");
+        }
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
@@ -66,6 +85,8 @@ public class PlayerMovement : MonoBehaviour
             }
             canJump = true;
         }
+
+
 
     }
 
