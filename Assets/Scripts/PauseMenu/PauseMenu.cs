@@ -15,14 +15,12 @@ public class PauseMenu : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
-    private void Start()
-    {
-        pauseMenu.SetActive(false);
-    }
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log(isPaused);
             if (isPaused)
             {
                 audioManager.PlaySFX(audioManager.menuopen);
@@ -37,7 +35,6 @@ public class PauseMenu : MonoBehaviour
     }
     public void Pause()
     {
-        
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -76,7 +73,7 @@ public class PauseMenu : MonoBehaviour
         audioManager.PlaySFX(audioManager.buttonclick);
         Time.timeScale = 1f;
         isPaused = false;
-        SceneController.instance.LoadFirstScene();
+        SceneController.instance.NewGame();
     }
 
     public void Settings()

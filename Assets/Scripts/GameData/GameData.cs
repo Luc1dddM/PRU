@@ -14,5 +14,6 @@ public class GameData
     {
         sceneIndex = 1;
         itemCollected = new SerializableItemDictionary<string, bool>();
+        playerPosition = new Vector3(7, -11, 5);
     }
 }

@@ -12,6 +12,7 @@ public class GateController : MonoBehaviour
     private void Awake()
     {
         doorText.text = "";
+        doorText.enabled = false;
 
     }
 
@@ -19,6 +20,7 @@ public class GateController : MonoBehaviour
     {
         if (collision.CompareTag("Key"))
         {
+            CoinController.instance.coinCout = 0;
             SceneController.instance.LoadNextScene();
         }
 
@@ -30,6 +32,7 @@ public class GateController : MonoBehaviour
 
     private IEnumerator textTiming()
     {
+        doorText.enabled = true;
         if (CoinController.instance.coinCout == 3)
         {
             doorText.text = "Press E to activate the Portal"; // appear text
@@ -42,7 +45,8 @@ public class GateController : MonoBehaviour
         }
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(3);
-       
+        doorText.enabled = false;
+
         doorText.text = "";
     }
 }

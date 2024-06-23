@@ -104,6 +104,8 @@ public class DataActionManager : MonoBehaviour
             gameData.sceneIndex = currentSceneIndex;
         }
 
+        Debug.Log("test index: " + currentSceneIndex);
+
         foreach (IDataAction action in dataActions)
         {
             action.SaveData(ref gameData);

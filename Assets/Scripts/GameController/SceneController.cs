@@ -44,6 +44,12 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadSceneAsync(DataActionManager.instance.GetSavedSceneIndex());
     }
 
+    public void NewGame()
+    {
+        DataActionManager.instance.NewGame();
+        SceneManager.LoadSceneAsync(1);
+    }
+
     IEnumerator LoadNewScene()
     {
         transAimt.SetTrigger("End");

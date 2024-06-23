@@ -61,6 +61,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     public void SetMusicVolumeSlider()
     {
+        Debug.Log("function run");
         float musicVol = musicSlider.value;
         // Debug.Log("value of music volume: " + musicVol);
         audioMixer.SetFloat("MusicVolParam", Mathf.Log10(musicVol) * 20);
@@ -77,12 +78,13 @@ public class SettingsMenuManager : MonoBehaviour
 
     private void LoadVolume() //load the save value when game be open from the second time
     {
+        Debug.Log(PlayerPrefs.GetFloat("masterSliderKeyName"));
         masterSlider.value = PlayerPrefs.GetFloat("masterSliderKeyName");
         musicSlider.value = PlayerPrefs.GetFloat("musicSliderKeyName");
         sfxSlider.value = PlayerPrefs.GetFloat("sfxSliderKeyName");
         //any change for volume value will be save by the methods below
         SetMasterVolumeSlider();
         SetMusicVolumeSlider();
-        SetSFXVolumeSlider();
+        SetSFXVolumeSlider(); 
     }
 }
