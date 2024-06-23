@@ -48,7 +48,11 @@ public class GrapplingHook : MonoBehaviour
     [HideInInspector] public Vector2 grappleDistanceVector;
 
     public bool activeGrappling;
-
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void Start()
     {
@@ -62,10 +66,12 @@ public class GrapplingHook : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
         {
             SetGrapplePoint();
+            audioManager.PlaySFX(audioManager.grappling);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        else if (Input.GetKeyUp(KeyCode.Mouse0) && activeGrappling)
         {
             StopGrappling();
+            audioManager.PlaySFX(audioManager.grappling);
         }
        
     }

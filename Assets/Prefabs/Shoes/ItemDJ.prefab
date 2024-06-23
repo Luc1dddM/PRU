@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7575554875779944813}
   - component: {fileID: 7378661216166891028}
   - component: {fileID: 2660132646789157253}
-  - component: {fileID: 1103896076124215473}
+  - component: {fileID: 6156739795208018615}
   m_Layer: 0
   m_Name: ItemDJ
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 186019876355559488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.87, y: 0.474, z: 0}
+  m_LocalPosition: {x: -7.16, y: -4.91, z: 0}
   m_LocalScale: {x: 0.04, y: 0.035, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 24.875431, y: 32.195557}
   m_EdgeRadius: 0
---- !u!114 &1103896076124215473
+--- !u!114 &6156739795208018615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 186019876355559488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c71bac75de22e845bbef534a8009c29, type: 3}
+  m_Script: {fileID: 11500000, guid: dd91943eac1445b46a94d3a438d18865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionScript: {fileID: 0}

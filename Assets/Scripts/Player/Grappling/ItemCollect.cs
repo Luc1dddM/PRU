@@ -8,6 +8,7 @@ public class ItemCollect : MonoBehaviour, IDataAction
     public IItemCollection actionable;
     public MonoBehaviour actionScript;
     private bool isCollected;
+    AudioManager audioManager;
 
 
     [SerializeField] private string id;
@@ -19,6 +20,7 @@ public class ItemCollect : MonoBehaviour, IDataAction
 
     public void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         actionable = actionScript as IItemCollection;
         isCollected = false;
         if (actionable == null)
@@ -30,7 +32,8 @@ public class ItemCollect : MonoBehaviour, IDataAction
     {
         if (collision.CompareTag("Player") && !isCollected)
         {
-            isCollected=true;
+            audioManager.PlaySFX(audioManager.collectitem);
+            isCollected = true;
             actionable.activeItem();
             Destroy(gameObject);
         }
