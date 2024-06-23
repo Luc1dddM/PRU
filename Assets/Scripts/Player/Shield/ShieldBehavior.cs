@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldBehavior : MonoBehaviour
+public class ShieldBehavior : MonoBehaviour, IItemCollection
 {
 
 
@@ -72,8 +72,7 @@ public class ShieldBehavior : MonoBehaviour
         }
     }
 
-    // Method to enable shield functionality
-    public void EnableShieldActivation()
+    public void activeItem()
     {
         canActivateShield = true;
     }

@@ -13,7 +13,13 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
-        SceneManager.LoadSceneAsync(1);
+        SceneController.instance.LoadSavedScene();
+    }
+
+    public void NewGame()
+    {
+        DataActionManager.instance.NewGame();
+        SceneController.instance.LoadFirstScene();
     }
     public void QuitGame()
     {
