@@ -5,19 +5,22 @@ using UnityEngine;
 public class Move : MonoBehaviour, IDataAction
 {
 
-    public float walkSpeed = 8f;
     public float jumpSpeed = 0.0f;
-    public float jumpDistance = 2f;
     public bool isGrounded;
     public LayerMask groundMask;
     public bool facingRight = true;
-    public bool canJump = true;
+
+
 
     public Collider2D bodycollider;
     public Collider2D Footcollider;
     public PhysicsMaterial2D normalMa;
     public PhysicsMaterial2D bounceMa;
 
+    private bool coinCollected = false;
+    private bool canJump = true;
+    private float jumpDistance = 2f;
+    private float walkSpeed = 8f;
     private float moveInput;
     private Rigidbody2D rb;
     private Animator animator;
@@ -93,7 +96,7 @@ public class Move : MonoBehaviour, IDataAction
         }
 
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
-            , new Vector2(1.1f, 0.05f), 0f, groundMask);
+            , new Vector2(1.163f, 0.03f), 0f, groundMask);
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
             CheckFacingDirection(moveInput);
@@ -159,13 +162,42 @@ public class Move : MonoBehaviour, IDataAction
         }
     }
 
+    //Collect coin 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!coinCollected && collision.CompareTag("Coin"))
+        {
+            coinCollected = true;
+            Destroy(collision.gameObject);
+            CoinController.instance.coinCout++;
+            StartCoroutine(ResetCoinCollected());
+
+        }
+    }
+
+    private IEnumerator ResetCoinCollected()
+    {
+        yield return new WaitForEndOfFrame();
+        coinCollected = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E) && CoinController.instance.coinCout == 3 && collision.CompareTag("Gate"))
+        {
+            CoinController.instance.coinEnough = true;
+        }
+
+    }
+
 
 
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), new Vector2(1.1f, 0.05f));
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), new Vector2(1.163f, 0.03f));
+
     }
 
     private void CheckFacingDirection(float horizontalInput)

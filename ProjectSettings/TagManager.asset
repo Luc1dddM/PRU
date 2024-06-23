@@ -13,6 +13,9 @@ TagManager:
   - Fire
   - Cloth
   - Ice
+  - Key
+  - Coin
+  - Gate
   - Audio
   layers:
   - Default
