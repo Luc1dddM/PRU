@@ -16,14 +16,17 @@ public class Freeze : MonoBehaviour
 
     private Animator animator;
     private Move move;
-    private IceCloth cloth;
+    private bool cloth = true;
+    private SlideMove slideMove ;
+    
+  
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         move = GetComponent<Move>();
-        cloth = GetComponent<IceCloth>();
+        slideMove = GetComponent<SlideMove>();
         spriteRenderer.sprite = normalSprite;
     }
 
@@ -42,6 +45,7 @@ public class Freeze : MonoBehaviour
             spriteRenderer.sprite = skatingSprite;
             move.enabled = false;
             animator.enabled = false;
+            slideMove.enabled = false;
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -60,6 +64,7 @@ public class Freeze : MonoBehaviour
                 spriteRenderer.sprite = normalSprite; //Trở lại hình ảnh bình thường
                 move.enabled = true;
                 animator.enabled = true;
+                slideMove .enabled = true;
             }
         }
     }
@@ -106,28 +111,23 @@ public class Freeze : MonoBehaviour
         }
     }
     private IEnumerator TakeDame()
-    {
-        int i = 0;
+    {    
         while (true)
         {
             if (healthAmount >= 0 && !isFire)
             {
                 // sau khi lấy item
-                if (cloth.cloth == false)
+                if (cloth == false)
                 {
-                    if(i==0)
-                    {
-                        yield return new WaitForSeconds(1f);
-                    }
-
-                    i++;
-                    TakeDamage(8); // thanh đóng băng tăng 
                     yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
+                    TakeDamage(8); // thanh đóng băng tăng 
+                    
                 }
-                else
+                else if (cloth == true)
                 {
+                    yield return new WaitForSeconds(0.5f);
                     TakeDamage(10);
-                    yield return new WaitForSeconds(0.5f); 
+                  
                 }
             }
             else
@@ -137,4 +137,15 @@ public class Freeze : MonoBehaviour
             
         }
     }
+   
+    public void ActiveCloth()
+    {
+        Heal(100);
+        cloth = false;
+        Debug.Log("Hi");
+        StopCoroutine(TakeDame());
+        StartCoroutine(TakeDame());
+
+    }
+
 }
