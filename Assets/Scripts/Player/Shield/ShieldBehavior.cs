@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldBehavior : MonoBehaviour
+public class ShieldBehavior : MonoBehaviour, IItemCollection
 {
 
 
@@ -10,7 +10,7 @@ public class ShieldBehavior : MonoBehaviour
     [SerializeField] private GameObject shield;
     //check if character is shielded or not
     private bool isShielded;
-    private bool canActivateShield;
+    public bool canActivateShield;
 
 
 
@@ -56,8 +56,7 @@ public class ShieldBehavior : MonoBehaviour
         }
     }
 
-    // Method to enable shield functionality
-    public void EnableShieldActivation()
+    public void activeItem()
     {
         canActivateShield = true;
     }

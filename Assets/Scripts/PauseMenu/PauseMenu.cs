@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
+        pauseMenu.SetActive(false);
     }
     void Update()
     {
@@ -53,5 +54,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         SceneController.instance.LoadFirstScene();
+    }
+
+    public void Settings()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 0f; //pause game speed
+        SettingsMenuManager.instance.OpenSettingsMenu();
     }
 }
