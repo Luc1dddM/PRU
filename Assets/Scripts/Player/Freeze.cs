@@ -17,6 +17,8 @@ public class Freeze : MonoBehaviour
     private Animator animator;
     private Move move;
     private IceCloth cloth;
+    private bool isFreezeSoundPlayed = false;
+    AudioManager audioManager;
 
     private void Awake()
     {
@@ -25,42 +27,44 @@ public class Freeze : MonoBehaviour
         move = GetComponent<Move>();
         cloth = GetComponent<IceCloth>();
         spriteRenderer.sprite = normalSprite;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Start()
     {
         // Start the health adjustment coroutine
-        StartCoroutine(AdjustHealth()); 
+        StartCoroutine(AdjustHealth());
         StartCoroutine(TakeDame());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (healthAmount == 0)
+        if (healthAmount == 0 && !isFreezeSoundPlayed)
         {
             spriteRenderer.sprite = skatingSprite;
             move.enabled = false;
             animator.enabled = false;
+            audioManager.PlaySFX(audioManager.freeze);
+            isFreezeSoundPlayed = true; // Đánh dấu là âm thanh freeze đã được phát
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Heal(8); // click chuột để phá băng, giảm 8
-        }
-
-        if (spriteRenderer.sprite == skatingSprite)
-        {
-            /*if (Input.GetMouseButtonDown(0)) 
+        if (spriteRenderer.sprite == skatingSprite) {
+            if (Input.GetMouseButtonDown(0))
             {
-                Heal(8);
-            }*/
+                audioManager.PlaySFX(audioManager.mealtingclick);
+                Heal(8); // click chuột để phá băng, giảm 8
+            }
+        }
 
-            if (healthAmount == 100) {
+
+        if (spriteRenderer.sprite == skatingSprite && healthAmount == 100)
+        {
                 spriteRenderer.sprite = normalSprite; //Trở lại hình ảnh bình thường
                 move.enabled = true;
                 animator.enabled = true;
-            }
+                audioManager.PlaySFX(audioManager.crackingIce);
+                isFreezeSoundPlayed = false; // Đặt lại trạng thái của biến isFreezeSoundPlayed
+
         }
     }
 
@@ -115,7 +119,7 @@ public class Freeze : MonoBehaviour
                 // sau khi lấy item
                 if (cloth.cloth == false)
                 {
-                    if(i==0)
+                    if (i == 0)
                     {
                         yield return new WaitForSeconds(1f);
                     }
@@ -127,14 +131,14 @@ public class Freeze : MonoBehaviour
                 else
                 {
                     TakeDamage(10);
-                    yield return new WaitForSeconds(0.5f); 
+                    yield return new WaitForSeconds(0.5f);
                 }
             }
             else
             {
                 yield return null;
             }
-            
+
         }
     }
 }

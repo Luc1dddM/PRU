@@ -1,9 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
+
 {
+
     [Header("--------------- AudioSource ----------------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
@@ -18,12 +20,24 @@ public class AudioManager : MonoBehaviour
     public AudioClip menuopen;
     public AudioClip collectitem;
     public AudioClip grappling;
+    public AudioClip freeze;
+    public AudioClip melting;
+    public AudioClip crackingIce;
+    public AudioClip mealtingclick;
+    public AudioClip shieldactived;
+    public AudioClip shieldbroken;
+    public AudioClip rocketExplosion;
+    public AudioClip laucher;
+
+
+
+
+
+    /*    public AudioClip ghost;*/
 
 
     private bool isWalking;
-    private bool isGrapping;
-
-
+  
 
     private void Start()
     {

@@ -11,6 +11,12 @@ public class ShieldBehavior : MonoBehaviour
     //check if character is shielded or not
     private bool isShielded;
     private bool canActivateShield;
+    private bool isShieldBrokenSoundPlayed;
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
 
 
@@ -19,6 +25,7 @@ public class ShieldBehavior : MonoBehaviour
         isShielded = false;
         shield.SetActive(false);
         canActivateShield = false; //cannot active shield when player does not collect item
+        isShieldBrokenSoundPlayed = false;
     }
 
     void Update()
@@ -36,7 +43,9 @@ public class ShieldBehavior : MonoBehaviour
         {
             shield.SetActive(true);
             isShielded = true;
+            audioManager.PlaySFX(audioManager.shieldactived);
             Debug.Log("Shield Actived");
+            isShieldBrokenSoundPlayed = false;
         }
     }
 
@@ -44,6 +53,13 @@ public class ShieldBehavior : MonoBehaviour
     {
         shield.SetActive(false);
         isShielded = false;
+        // Only play the shield broken sound if it hasn't been played yet
+        if (!isShieldBrokenSoundPlayed)
+        {
+            audioManager.PlaySFX(audioManager.shieldbroken);
+            isShieldBrokenSoundPlayed = true;
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

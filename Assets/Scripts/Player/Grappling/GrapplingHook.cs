@@ -65,13 +65,13 @@ public class GrapplingHook : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
         {
-            audioManager.PlaySFX(audioManager.grappling);
             SetGrapplePoint();
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
             audioManager.PlaySFX(audioManager.grappling);
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0) && activeGrappling)
+        {
             StopGrappling();
+            audioManager.PlaySFX(audioManager.grappling);
         }
        
     }

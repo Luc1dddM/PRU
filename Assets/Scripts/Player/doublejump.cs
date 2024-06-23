@@ -12,7 +12,6 @@ public class doublejump : MonoBehaviour, IItemCollection
     private bool canDoubleJump;
     private bool canActivateDoubleJump;
     AudioManager audioManager;
-    private bool isMoving;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -32,7 +31,7 @@ public class doublejump : MonoBehaviour, IItemCollection
         var emission = doubleJumpParticle.emission;
         emission.rateOverTime = 50f; // Đặt số lượng hạt phát ra mỗi giây
     }
-
+    
     // Update is called once per frame
     void Update()
     {
