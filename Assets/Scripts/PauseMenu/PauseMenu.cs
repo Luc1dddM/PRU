@@ -43,9 +43,7 @@ public class PauseMenu : MonoBehaviour
     public void Home()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
-        SceneController.instance.LoadMainMenu();
-        isPaused = false;
-        Time.timeScale = 1f;
+        StartCoroutine(LoadScene());
     }
 
     public void Resume()
@@ -58,19 +56,21 @@ public class PauseMenu : MonoBehaviour
 
     public void ConfirmRestart()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         restartConfirm.SetActive(true);
     }
 
     public void CancelRestart()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         restartConfirm.SetActive(false);
     }
 
     public void Restart()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         restartConfirm.SetActive(false);
         pauseMenu.SetActive(false);
-        audioManager.PlaySFX(audioManager.buttonclick);
         Time.timeScale = 1f;
         isPaused = false;
         SceneController.instance.NewGame();
@@ -78,8 +78,24 @@ public class PauseMenu : MonoBehaviour
 
     public void Settings()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         pauseMenu.SetActive(false);
         Time.timeScale = 0f; //pause game speed
         SettingsMenuManager.instance.OpenSettingsMenu();
+    }
+
+    private void LoadMainMenu()
+    {
+        SceneController.instance.LoadMainMenu();
+        isPaused = false;
+        Time.timeScale = 1f;
+    }
+
+    private IEnumerator LoadScene()
+    {
+        yield return new WaitForSecondsRealtime(0.5f); 
+        SceneController.instance.LoadMainMenu();
+        isPaused = false;
+        Time.timeScale = 1f;
     }
 }
