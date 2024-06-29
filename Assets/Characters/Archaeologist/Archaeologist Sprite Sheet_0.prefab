@@ -160,6 +160,7 @@ MonoBehaviour:
   Footcollider: {fileID: 145871263016344224}
   normalMa: {fileID: 6200000, guid: bd3f369c0aba22f4f8b803acd8271dd0, type: 2}
   bounceMa: {fileID: 6200000, guid: 715e290dad4b25c478bf89e6836d878e, type: 2}
+  canJump: 1
   canDoubleJump: 0
 --- !u!61 &3913506253799497080
 BoxCollider2D:
@@ -238,7 +239,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00001206249, y: -0.072}
+  m_Offset: {x: -0.00001206249, y: -0.07021479}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -249,7 +250,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1006243, y: 0.0003}
+  m_Size: {x: 0.1006243, y: 0.003870435}
   m_EdgeRadius: 0
 --- !u!1 &5227234616953883069
 GameObject:
@@ -386,4 +387,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinCout: 0
   coinText: {fileID: 0}
-  coinEnough: 0

@@ -86,8 +86,15 @@ public class GhostController : MonoBehaviour
         stand.enabled = true; // appear a edge collider to stand
         trigger.enabled = false;//disappear the trigger 
         Debug.Log(stand.enabled);
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
+        //Use loop to fadeout the ghost for 5 seconds.
+        for (float f = 5; f >=-0.05f; f -= 0.05f)
+        {
+            Color c = spriteRenderer.color;
+            c.a = f;
+            spriteRenderer.color = c;
+            yield return new WaitForSeconds(0.05f);
+
+        }
 
         //After we have waited 5 seconds execute this.
         stand.enabled = false;// disappear a edge collider to stand

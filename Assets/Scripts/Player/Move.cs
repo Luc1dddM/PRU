@@ -18,7 +18,7 @@ public class Move : MonoBehaviour, IDataAction
     public PhysicsMaterial2D bounceMa;
 
     private bool coinCollected = false;
-    private bool canJump = true;
+    public bool canJump = true;
     private float jumpDistance = 2f;
     private float walkSpeed = 8f;
     private float moveInput;
@@ -43,6 +43,7 @@ public class Move : MonoBehaviour, IDataAction
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Footcollider.sharedMaterial = normalMa;
+        bodycollider.sharedMaterial = bounceMa;
         rb.gravityScale = 6f;
     }
 
@@ -77,7 +78,7 @@ public class Move : MonoBehaviour, IDataAction
 
         if (isGrounded)
         {
-            bodycollider.sharedMaterial = normalMa;
+            
             canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
             if (airTime >= minAirTime)
             {
@@ -90,6 +91,7 @@ public class Move : MonoBehaviour, IDataAction
         else
         {
             bodycollider.sharedMaterial = bounceMa;
+            
 
             // Tăng thời gian ở trên không
             airTime += Time.deltaTime;
@@ -138,6 +140,11 @@ public class Move : MonoBehaviour, IDataAction
             canJump = true;
            
         }
+
+        if(rb.velocity.y < 0)
+        {
+            animator.SetBool("IsRecharge", false);
+        }
     }
 
 
@@ -162,34 +169,8 @@ public class Move : MonoBehaviour, IDataAction
         }
     }
 
-    //Collect coin 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!coinCollected && collision.CompareTag("Coin"))
-        {
-            audioManager.PlaySFX(audioManager.collectcoin);
-            coinCollected = true;
-            Destroy(collision.gameObject);
-            CoinController.instance.coinCout++;
-            StartCoroutine(ResetCoinCollected());
 
-        }
-    }
 
-    private IEnumerator ResetCoinCollected()
-    {
-        yield return new WaitForEndOfFrame();
-        coinCollected = false;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.E) && CoinController.instance.coinCout == 3 && collision.CompareTag("Gate"))
-        {
-            CoinController.instance.coinEnough = true;
-        }
-
-    }
 
 
 
