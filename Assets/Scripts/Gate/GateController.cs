@@ -27,7 +27,9 @@ public class GateController : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            audioManager.PlaySFX(audioManager.changemapgate);
             StartCoroutine(textTiming());
+
         }
     }
 
@@ -44,8 +46,7 @@ public class GateController : MonoBehaviour
             doorText.text = "You do not have enough coin!!!"; // appear text
 
         }
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        audioManager.PlaySFX(audioManager.changemapgate);
+
         yield return new WaitForSeconds(3);
         doorText.enabled = false;
 
