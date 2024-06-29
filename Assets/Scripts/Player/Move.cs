@@ -65,12 +65,12 @@ public class Move : MonoBehaviour, IDataAction
             isMoving = false;
             audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
         }
-
+        
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
 
-            CheckFacingDirection(moveInput);
+            CheckFacingDirection();
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
 
@@ -101,7 +101,7 @@ public class Move : MonoBehaviour, IDataAction
             , new Vector2(1.163f, 0.03f), 0f, groundMask);
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
-            CheckFacingDirection(moveInput);
+            CheckFacingDirection();
             jumpSpeed += Time.deltaTime * 60f;
             animator.SetBool("IsRecharge", true);
             canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
@@ -182,13 +182,13 @@ public class Move : MonoBehaviour, IDataAction
 
     }
 
-    private void CheckFacingDirection(float horizontalInput)
+    public void CheckFacingDirection()
     {
-        if (facingRight && horizontalInput < 0f)
+        if (facingRight && moveInput < 0f)
         {
             Flip();
         }
-        else if (!facingRight && horizontalInput > 0f)
+        else if (!facingRight && moveInput > 0f)
         {
             Flip();
         }

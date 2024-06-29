@@ -1626,7 +1626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5399024401888775850, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5881980038489319634, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_Name
@@ -11850,6 +11850,10 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 1604905329}
+    - target: {fileID: 8198375237377109377, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
