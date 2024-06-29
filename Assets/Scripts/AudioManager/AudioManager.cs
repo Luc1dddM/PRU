@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip shieldbroken;
     public AudioClip rocketExplosion;
     public AudioClip laucher;
+    public AudioClip collectcoin;
+    public AudioClip changemapgate;
+
 
 
 

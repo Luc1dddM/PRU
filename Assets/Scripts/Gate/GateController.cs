@@ -7,10 +7,11 @@ public class GateController : MonoBehaviour
 {
 
     public Text doorText;
-
+    AudioManager audioManager;
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         doorText.text = "";
         doorText.enabled = false;
 
@@ -44,6 +45,7 @@ public class GateController : MonoBehaviour
 
         }
         //yield on a new YieldInstruction that waits for 5 seconds.
+        audioManager.PlaySFX(audioManager.changemapgate);
         yield return new WaitForSeconds(3);
         doorText.enabled = false;
 

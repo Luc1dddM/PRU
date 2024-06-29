@@ -147,7 +147,7 @@ public class Move : MonoBehaviour, IDataAction
     {
         if (!isGrounded)
         {
-            jumpSpeed = 0f;
+            jumpSpeed = 0f;             
             canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
 
         }
@@ -167,6 +167,7 @@ public class Move : MonoBehaviour, IDataAction
     {
         if (!coinCollected && collision.CompareTag("Coin"))
         {
+            audioManager.PlaySFX(audioManager.collectcoin);
             coinCollected = true;
             Destroy(collision.gameObject);
             CoinController.instance.coinCout++;
