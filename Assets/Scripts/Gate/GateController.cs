@@ -20,8 +20,8 @@ public class GateController : MonoBehaviour
     {
         if (collision.CompareTag("Key"))
         {
-            CoinController.instance.coinCout = 0;
             SceneController.instance.LoadNextScene();
+            CoinController.instance.coinCout = 0;
         }
 
         if (collision.CompareTag("Player"))

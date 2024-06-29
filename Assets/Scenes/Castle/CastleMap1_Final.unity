@@ -30633,11 +30633,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.08
+      value: 7.12
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.64
+      value: -7.67
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34379,7 +34379,7 @@ GameObject:
   - component: {fileID: 1753654724}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

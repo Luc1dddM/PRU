@@ -42,9 +42,8 @@ public class CoinController : MonoBehaviour
         coinText.text = ": " + coinCout.ToString();
 
         CircleCollider2D.enabled = coinEnough;
-
-
     }
+
 
 
 }

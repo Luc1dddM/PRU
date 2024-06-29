@@ -28,7 +28,6 @@ public class DataActionManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        instance = this;
         this.fileHandler = new FileHandler(Application.persistentDataPath, fileName);
     }
 
@@ -38,11 +37,11 @@ public class DataActionManager : MonoBehaviour
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    private void OnDisable()
+    /*private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
-    }
+    }*/
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
