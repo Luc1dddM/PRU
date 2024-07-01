@@ -4,96 +4,65 @@ using UnityEngine;
 
 public class SlideMove : MonoBehaviour
 {
-    private bool isOnGroundIce = false; // kiểm tra trạng thái
-    private bool stopSliding = false;
-    private float slideSpeed = 2f; // tốc độ trượt
-    private float defaultSlideSpeed;
-    private bool isJumpingLeft = false;
-    private bool isJumpingRight = false;
-    private bool isJumping = false;
+    public float slideSpeed = 10f;
+    public float friction = 0.5f;
+    public bool isSliding = false;
 
-    private void Awake()
+    private Rigidbody2D rb;
+    private Animator animator;
+    private bool onIce = false;
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-        defaultSlideSpeed = slideSpeed;
+        animator = gameObject.GetComponent<Animator>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        // Kiểm tra phím nhảy và hướng nhảy
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (isSliding) // Nếu đang trượt
         {
-            isJumpingLeft = true;
-            isJumpingRight = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            isJumpingLeft = false;
-            isJumpingRight = true;
-        }
-
-        // Kiểm tra phím space để nhảy
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isJumping = true;
-        }
-
-        // Dừng trượt khi nhấn phím ngược lại
-        if (isOnGroundIce)
-        {
-            if (isJumpingLeft && Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetAxisRaw("Horizontal") != 0)  // Nếu có đầu vào từ phím
             {
-                stopSliding = true;
-            }
-            else if (isJumpingRight && Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                stopSliding = true;
-            }
-
-            if (stopSliding && !Input.anyKey)
-            {
-                stopSliding = false;
+                StopSliding();
             }
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (isOnGroundIce && !stopSliding && !isJumping)
+        if (isSliding)
         {
-            Vector2 pos = transform.position;
-            float s = slideSpeed * Time.fixedDeltaTime;
-
-            if (isJumpingLeft)
-            {
-                pos.x -= s; // Trượt sang trái
-            }
-            else if (isJumpingRight)
-            {
-                pos.x += s; // Trượt sang phải
-            }
-
-            transform.position = pos;
+            Vector2 slideDirection = new Vector2(transform.localScale.x, 0).normalized; // Xác định hướng trượt dựa trên hướng
+            rb.velocity = new Vector2(slideDirection.x * slideSpeed, rb.velocity.y); // Đặt vận tốc của Rigidbody để trượt
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Ice"))
+        if (collision.collider.CompareTag("Ice")) // trên Ice
         {
-            isOnGroundIce = true; // Đang đứng trên Ice
-            if (isJumping)
+            if (!isSliding && rb.velocity.y < 0) // Nhân vật đang rơi xuống
             {
-                isJumping = false; // Đã rớt xuống, ngừng nhảy
+                StartSliding();
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void StartSliding()
     {
-        if (collision.CompareTag("Ice"))
-        {
-            isOnGroundIce = false; // Không còn đứng trên Ice
-            stopSliding = false;
-        }
+        isSliding = true;
+        animator.SetBool("IsSliding", true);
+        rb.velocity = new Vector2(transform.localScale.x * slideSpeed, rb.velocity.y);
+    }
+
+    private void StopSliding()
+    {
+        isSliding = false;
+        animator.SetBool("IsSliding", false);
+        rb.velocity = new Vector2(rb.velocity.x * friction, rb.velocity.y); // Áp dụng ma sát để làm chậm trượt
     }
 }
