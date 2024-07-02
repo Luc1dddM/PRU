@@ -16,6 +16,5 @@ public class GameData
         sceneIndex = 1;
         coinNumber = 0;
         itemCollected = new SerializableItemDictionary<string, bool>();
-        playerPosition = new Vector3(7, 11, 5);
     }
 }

@@ -31,6 +31,7 @@ public class GateController : MonoBehaviour
             StartCoroutine(PortalIn());
             CoinController.instance.ResetCoin();
             SceneController.instance.LoadNextScene();
+            CoinController.instance.coinCout = 0;
         }
 
     }

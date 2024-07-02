@@ -5,6 +5,8 @@ using UnityEngine;
 public class ItemCollect : MonoBehaviour, IDataAction
 {
 
+    [SerializeField] GameObject tutorial;
+
     public IItemCollection actionable;
     public MonoBehaviour actionScript;
     private bool isCollected;
@@ -20,6 +22,7 @@ public class ItemCollect : MonoBehaviour, IDataAction
 
     public void Awake()
     {
+        tutorial.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         actionable = actionScript as IItemCollection;
         isCollected = false;
@@ -32,6 +35,7 @@ public class ItemCollect : MonoBehaviour, IDataAction
     {
         if (collision.CompareTag("Player") && !isCollected)
         {
+            tutorial.SetActive(true);
             audioManager.PlaySFX(audioManager.collectitem);
             isCollected = true;
             actionable.activeItem();

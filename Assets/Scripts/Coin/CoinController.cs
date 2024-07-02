@@ -58,4 +58,5 @@ public class CoinController : MonoBehaviour, IItemCollection
         }
     }
 
+
 }
