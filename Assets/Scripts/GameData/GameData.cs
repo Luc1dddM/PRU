@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public int coinNumber;
     public Vector3 playerPosition;
     public int sceneIndex;
     public SerializableItemDictionary<string, bool> itemCollected;
@@ -13,7 +14,7 @@ public class GameData
     public GameData()
     {
         sceneIndex = 1;
+        coinNumber = 0;
         itemCollected = new SerializableItemDictionary<string, bool>();
-        playerPosition = new Vector3(7, 11, 5);
     }
 }
