@@ -18,7 +18,7 @@ public class Move : MonoBehaviour, IDataAction
     public PhysicsMaterial2D bounceMa;
 
     private bool coinCollected = false;
-    private bool canJump = true;
+    public bool canJump = true;
     private float jumpDistance = 2f;
     private float walkSpeed = 8f;
     private float moveInput;
@@ -43,6 +43,7 @@ public class Move : MonoBehaviour, IDataAction
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         Footcollider.sharedMaterial = normalMa;
+        bodycollider.sharedMaterial = bounceMa;
         rb.gravityScale = 6f;
     }
 
@@ -64,12 +65,11 @@ public class Move : MonoBehaviour, IDataAction
             isMoving = false;
             audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
         }
-
+        
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
-
-            CheckFacingDirection(moveInput);
+            CheckFacingDirection();
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
 
@@ -77,7 +77,7 @@ public class Move : MonoBehaviour, IDataAction
 
         if (isGrounded)
         {
-            bodycollider.sharedMaterial = normalMa;
+            
             canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
             if (airTime >= minAirTime)
             {
@@ -90,6 +90,7 @@ public class Move : MonoBehaviour, IDataAction
         else
         {
             bodycollider.sharedMaterial = bounceMa;
+            
 
             // Tăng thời gian ở trên không
             airTime += Time.deltaTime;
@@ -99,7 +100,7 @@ public class Move : MonoBehaviour, IDataAction
             , new Vector2(1.163f, 0.03f), 0f, groundMask);
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
-            CheckFacingDirection(moveInput);
+            CheckFacingDirection();
             jumpSpeed += Time.deltaTime * 60f;
             animator.SetBool("IsRecharge", true);
             canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
@@ -138,6 +139,11 @@ public class Move : MonoBehaviour, IDataAction
             canJump = true;
            
         }
+
+        if(rb.velocity.y < 0)
+        {
+            animator.SetBool("IsRecharge", false);
+        }
     }
 
 
@@ -162,34 +168,8 @@ public class Move : MonoBehaviour, IDataAction
         }
     }
 
-    //Collect coin 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!coinCollected && collision.CompareTag("Coin"))
-        {
-            audioManager.PlaySFX(audioManager.collectcoin);
-            coinCollected = true;
-            Destroy(collision.gameObject);
-            CoinController.instance.coinCout++;
-            StartCoroutine(ResetCoinCollected());
 
-        }
-    }
 
-    private IEnumerator ResetCoinCollected()
-    {
-        yield return new WaitForEndOfFrame();
-        coinCollected = false;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.E) && CoinController.instance.coinCout == 3 && collision.CompareTag("Gate"))
-        {
-            CoinController.instance.coinEnough = true;
-        }
-
-    }
 
 
 
@@ -201,13 +181,13 @@ public class Move : MonoBehaviour, IDataAction
 
     }
 
-    private void CheckFacingDirection(float horizontalInput)
+    public void CheckFacingDirection()
     {
-        if (facingRight && horizontalInput < 0f)
+        if (facingRight && moveInput < 0f)
         {
             Flip();
         }
-        else if (!facingRight && horizontalInput > 0f)
+        else if (!facingRight && moveInput > 0f)
         {
             Flip();
         }
@@ -221,12 +201,19 @@ public class Move : MonoBehaviour, IDataAction
 
     public void LoadData(GameData gameData)
     {
+        if(gameData.playerPosition == new Vector3())
+        {
+            return;
+        }
         gameObject.transform.position = gameData.playerPosition;
     }
 
     public void SaveData(ref GameData gameData)
     {
-        gameData.playerPosition = this.transform.position;
+        if(this != null)
+        {
+            gameData.playerPosition = this.transform.position;
+        }
     }
 
     // OnCollisionEnter2D is called when this object collides with another object

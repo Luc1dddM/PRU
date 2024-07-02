@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCollect : MonoBehaviour, IDataAction
+public class CoinCollect : MonoBehaviour, IDataAction
 {
-
-    [SerializeField] GameObject tutorial;
-
     public IItemCollection actionable;
     public MonoBehaviour actionScript;
     private bool isCollected;
@@ -22,7 +19,6 @@ public class ItemCollect : MonoBehaviour, IDataAction
 
     public void Awake()
     {
-        tutorial.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         actionable = actionScript as IItemCollection;
         isCollected = false;
@@ -35,8 +31,8 @@ public class ItemCollect : MonoBehaviour, IDataAction
     {
         if (collision.CompareTag("Player") && !isCollected)
         {
-            tutorial.SetActive(true);
-            audioManager.PlaySFX(audioManager.collectitem);
+            audioManager.PlaySFX(audioManager.collectcoin);
+            CoinController.instance.coinCout++;
             isCollected = true;
             actionable.activeItem();
             Destroy(gameObject);
@@ -46,8 +42,9 @@ public class ItemCollect : MonoBehaviour, IDataAction
     public void LoadData(GameData gameData)
     {
         gameData.itemCollected.TryGetValue(id, out isCollected);
-        if(isCollected)
+        if (isCollected)
         {
+            CoinController.instance.coinCout = gameData.coinNumber;
             actionable.activeItem();
             Destroy(gameObject);
         }
@@ -60,5 +57,6 @@ public class ItemCollect : MonoBehaviour, IDataAction
             gameData.itemCollected.Remove(id);
         }
         gameData.itemCollected.Add(id, isCollected);
+        gameData.coinNumber = CoinController.instance.coinCout;
     }
 }

@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 99
   m_Sprite: {fileID: -58262918, guid: b6249a83e8f79104d91669211b25bf83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -231,7 +231,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Time: 1.2
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   explosionEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  rotateSpeed: 100
-  detonateTime: 5
+  rotateSpeed: 280
+  detonateTime: 7
   ExplosionForceMulti: 300
   ExplosionRadius: 4

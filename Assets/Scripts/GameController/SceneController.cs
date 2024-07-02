@@ -14,12 +14,13 @@ public class SceneController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("SceneController instance set and marked as DontDestroyOnLoad.");
         }
         else
         {
             Destroy(gameObject);
+            Debug.LogWarning("Attempting to create a second instance of SceneController. Destroying the new instance.");
         }
-        instance = this;
 
     }
 
