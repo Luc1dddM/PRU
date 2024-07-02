@@ -68,7 +68,6 @@ public class Move : MonoBehaviour, IDataAction
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
-
             CheckFacingDirection(moveInput);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
