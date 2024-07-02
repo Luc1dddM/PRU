@@ -11,12 +11,12 @@ public class Rocket : MonoBehaviour
     public GameObject explosionEffect; //when hit target, instantiate the explode effect
 
     private float speed = 3f; //speed of the missile
-    public float rotateSpeed = 280f; //speed rotate of missile
+    public float rotateSpeed = 300f; //speed rotate of missile
 
     public float detonateTime = 7f;
 
     Collider2D[] inExplosionRadius = null; //indicate any collider within explosion radius
-    [SerializeField] private float ExplosionForceMulti = 300; //indicate how strong the force when hit other objects
+    [SerializeField] private float ExplosionForceMulti = 500; //indicate how strong the force when hit other objects
     [SerializeField] private float ExplosionRadius = 4; //explode radius can affect
     AudioManager audioManager;
 

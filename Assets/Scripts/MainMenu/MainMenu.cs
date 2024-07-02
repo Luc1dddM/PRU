@@ -32,6 +32,14 @@ public class MainMenu : MonoBehaviour
         DataActionManager.instance.NewGame();
         SceneController.instance.LoadFirstScene();
     }
+
+    public void Settings()
+    {
+        audioManager.PlaySFX(audioManager.buttonclick);
+        Time.timeScale = 0f; //pause game speed
+        SettingsMenuManager.instance.OpenSettingsMenu();
+    }
+
     public void QuitGame()
     {
         audioManager.PlaySFX(audioManager.buttonclick);

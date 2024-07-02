@@ -32,7 +32,7 @@ public class Launcher : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, target.transform.position);
         Debug.Log(distance);
-        if (distance < 15)
+        if (distance < 13)
         {
             timer += Time.deltaTime;
             if (timer > 5)//after 5 secs 
