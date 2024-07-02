@@ -58,7 +58,6 @@ public class Freeze : MonoBehaviour
             }
         }
 
-
         if (spriteRenderer.sprite == skatingSprite && healthAmount == 100)
         {
                 spriteRenderer.sprite = normalSprite; //Trở lại hình ảnh bình thường
@@ -67,7 +66,6 @@ public class Freeze : MonoBehaviour
                 audioManager.PlaySFX(audioManager.crackingIce);
                 isFreezeSoundPlayed = false; // Đặt lại trạng thái của biến isFreezeSoundPlayed
                 slideMove.enabled = true;
-
         }
     }
 
@@ -123,13 +121,11 @@ public class Freeze : MonoBehaviour
                 {
                     yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
                     TakeDamage(8); // thanh đóng băng tăng 
-                    
                 }
                 else if (cloth == true)
                 {
                     yield return new WaitForSeconds(0.5f);
                     TakeDamage(10);
-                  
                 }
             }
             else
@@ -144,10 +140,8 @@ public class Freeze : MonoBehaviour
     {
         Heal(100);
         cloth = false;
-        Debug.Log("Hi");
         StopCoroutine(TakeDame());
         StartCoroutine(TakeDame());
-
     }
 
 }

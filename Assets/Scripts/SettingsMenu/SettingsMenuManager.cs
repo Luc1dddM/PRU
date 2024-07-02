@@ -8,7 +8,7 @@ public class SettingsMenuManager : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider masterSlider, musicSlider, sfxSlider;
-
+    AudioManager audioManager;
     private void Awake()
     {
         if (instance == null)
@@ -19,6 +19,7 @@ public class SettingsMenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Start()
@@ -45,6 +46,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     public void CloseSettingsMenu()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         settingsMenu.SetActive(false);
         Time.timeScale = 1f; //return the real-time game speed 
         // PauseMenu.PauseMenuInstance.Pause(); //still pause when close setting

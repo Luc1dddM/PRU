@@ -12,7 +12,13 @@ public class GhostController : MonoBehaviour
     public BoxCollider2D trigger;
 
     private SpriteRenderer spriteRenderer;
-    private bool isStand;
+    public bool isStand;
+
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -88,17 +94,23 @@ public class GhostController : MonoBehaviour
         Debug.Log(stand.enabled);
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(5);
-
         //After we have waited 5 seconds execute this.
         stand.enabled = false;// disappear a edge collider to stand
         spriteRenderer.color = Color.clear;// make the ghost become clear
         isStand = false;
-
+        if (spriteRenderer.color == Color.clear)
+        {
+            audioManager.StopGhostSound();
+        }
         Debug.Log(stand.enabled);
 
         //After we have waited 5 seconds execute this.
         yield return new WaitForSeconds(5);
         spriteRenderer.color = tmp;// make the ghost become the old color
+        if (spriteRenderer.color == tmp)
+        {
+            audioManager.PlayGhostSound();
+        }
         trigger.enabled = true;//appear the trigger 
     }
 }
