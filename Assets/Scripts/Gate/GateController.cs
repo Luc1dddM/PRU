@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,14 +6,20 @@ using UnityEngine.UI;
 public class GateController : MonoBehaviour
 {
 
-    public Text doorText;
     AudioManager audioManager;
+    GameObject player;
+    Animation anim;
+    Rigidbody2D playerRb;
+
+    
+
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        doorText.text = "";
-        doorText.enabled = false;
+        anim = player.GetComponent<Animation>();
+        playerRb = player.GetComponent<Rigidbody2D>();
 
     }
 
@@ -21,34 +27,39 @@ public class GateController : MonoBehaviour
     {
         if (collision.CompareTag("Key"))
         {
+            audioManager.PlaySFX(audioManager.changemapgate);
+            StartCoroutine(PortalIn());
+            CoinController.instance.ResetCoin();
             SceneController.instance.LoadNextScene();
             CoinController.instance.coinCout = 0;
         }
 
-        if (collision.CompareTag("Player"))
-        {
-            StartCoroutine(textTiming());
-        }
     }
 
-    private IEnumerator textTiming()
+    private IEnumerator PortalIn()
     {
-        doorText.enabled = true;
-        if (CoinController.instance.coinCout == 3)
-        {
-            doorText.text = "Press E to activate the Portal"; // appear text
-
-        }
-        else
-        {
-            doorText.text = "You do not have enough coin!!!"; // appear text
-
-        }
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        audioManager.PlaySFX(audioManager.changemapgate);
-        yield return new WaitForSeconds(3);
-        doorText.enabled = false;
-
-        doorText.text = "";
+        Debug.Log("In");
+        playerRb.simulated = false;
+        StartCoroutine(Shrink());
+        yield return new WaitForSeconds(0.5f);
     }
+
+
+
+    private IEnumerator Shrink()
+    {
+        float timeElapsed = 0;
+        Vector3 targetScale = new Vector3(0f, 0f, 0f);
+        Vector3 initialScale = playerRb.transform.localScale;
+
+        while (timeElapsed < 0.5f)
+        {
+            player.transform.position = Vector2.MoveTowards(player.transform.position, transform.position, 3 * Time.deltaTime);
+            player.transform.localScale = Vector3.Lerp(initialScale, targetScale, timeElapsed / 0.5f);
+            yield return new WaitForEndOfFrame();
+            timeElapsed += Time.deltaTime;
+        }
+
+    }
+
 }
