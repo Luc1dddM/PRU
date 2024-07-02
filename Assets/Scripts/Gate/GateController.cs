@@ -34,6 +34,12 @@ public class GateController : MonoBehaviour
             CoinController.instance.coinCout = 0;
         }
 
+        if (collision.CompareTag("Player"))
+        {
+            audioManager.PlaySFX(audioManager.changemapgate);
+            StartCoroutine(textTiming());
+
+        }
     }
 
     private IEnumerator PortalIn()
@@ -60,6 +66,8 @@ public class GateController : MonoBehaviour
             timeElapsed += Time.deltaTime;
         }
 
+        yield return new WaitForSeconds(3);
+        doorText.enabled = false;
     }
 
 }

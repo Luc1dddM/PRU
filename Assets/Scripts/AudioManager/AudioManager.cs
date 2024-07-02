@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     [Header("--------------- AudioSource ----------------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource ghostSource;
+    [SerializeField] AudioSource blackHoleSource;
 
     [Header("--------------- AudioClip ----------------")]
     public AudioClip background;
@@ -30,17 +32,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip laucher;
     public AudioClip collectcoin;
     public AudioClip changemapgate;
-
-
-
-
-
-
-    /*    public AudioClip ghost;*/
+    public AudioClip ghost;
+    public AudioClip blackHole;
 
 
     private bool isWalking;
-  
+    private bool isGhostSoundPlaying;
+    private bool isBlackHoleSoundPlaying;
+
 
     private void Start()
     {
@@ -51,7 +50,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip)
     {
-            SFXSource.PlayOneShot(clip);
+        SFXSource.PlayOneShot(clip);
     }
 
     public void PlayWalk()
@@ -68,8 +67,44 @@ public class AudioManager : MonoBehaviour
     {
         if (isWalking)
         {
+            SFXSource.clip = walk;
             SFXSource.Stop();
             isWalking = false;
         }
     }
+
+    public void PlayGhostSound()
+    {
+        if (!isGhostSoundPlaying)
+        {
+            ghostSource.clip = ghost;
+            ghostSource.loop = true;
+            ghostSource.Play();
+            isGhostSoundPlaying = true;
+        }
+    }
+
+    public void StopGhostSound()
+    {
+        ghostSource.Stop();
+        isGhostSoundPlaying = false;
+    }
+
+    public void PlayBlackHoleSound()
+    {
+        if (!isBlackHoleSoundPlaying)
+        {
+            blackHoleSource.clip = blackHole;
+            blackHoleSource.loop = true;
+            blackHoleSource.Play();
+            isBlackHoleSoundPlaying = true;
+        }
+    }
+
+    public void StopBlackHoleSound()
+    {
+        blackHoleSource.Stop();
+        isBlackHoleSoundPlaying = false;
+    }
+
 }

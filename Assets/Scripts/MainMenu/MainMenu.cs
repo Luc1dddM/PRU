@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
+        audioManager.PlaySFX(audioManager.buttonclick);
         DataActionManager.instance.NewGame();
         SceneController.instance.LoadFirstScene();
     }
