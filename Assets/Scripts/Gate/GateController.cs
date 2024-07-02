@@ -11,8 +11,6 @@ public class GateController : MonoBehaviour
     Animation anim;
     Rigidbody2D playerRb;
 
-    
-
 
     private void Awake()
     {
@@ -31,15 +29,8 @@ public class GateController : MonoBehaviour
             StartCoroutine(PortalIn());
             CoinController.instance.ResetCoin();
             SceneController.instance.LoadNextScene();
-            CoinController.instance.coinCout = 0;
         }
 
-        if (collision.CompareTag("Player"))
-        {
-            audioManager.PlaySFX(audioManager.changemapgate);
-            StartCoroutine(textTiming());
-
-        }
     }
 
     private IEnumerator PortalIn()
@@ -66,8 +57,6 @@ public class GateController : MonoBehaviour
             timeElapsed += Time.deltaTime;
         }
 
-        yield return new WaitForSeconds(3);
-        doorText.enabled = false;
     }
 
 }

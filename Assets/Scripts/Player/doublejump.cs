@@ -10,7 +10,7 @@ public class doublejump : MonoBehaviour, IItemCollection
     private ParticleSystem doubleJumpParticle; 
     public float boostJumpSpeed = 18f; 
     private bool canDoubleJump;
-    private bool canActivateDoubleJump;
+    public bool canActivateDoubleJump = false;
     AudioManager audioManager;
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class doublejump : MonoBehaviour, IItemCollection
         moveScript = gameObject.GetComponent<Move>();
         doubleJumpParticle = gameObject.GetComponentInChildren<ParticleSystem>();
         canDoubleJump = false; // Ban đầu không cho phép nhảy đôi
-        canActivateDoubleJump = false; //cannot active doublejump when player does not collect item
 
         // Điều chỉnh số lượng hạt phát ra
         var emission = doubleJumpParticle.emission;
