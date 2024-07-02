@@ -58,7 +58,6 @@ public class GrapplingHook : MonoBehaviour
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
-        activeGrappling = false;
     }
 
     private void Update()
@@ -66,12 +65,10 @@ public class GrapplingHook : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
         {
             SetGrapplePoint();
-            audioManager.PlaySFX(audioManager.grappling);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0) && activeGrappling)
+        else if (Input.GetKeyUp(KeyCode.Mouse0) && canGrappling)
         {
             StopGrappling();
-            audioManager.PlaySFX(audioManager.grappling);
         }
        
     }
@@ -86,25 +83,26 @@ public class GrapplingHook : MonoBehaviour
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {
+                    audioManager.PlaySFX(audioManager.grappling);
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)firePoint.position;
                     canGrappling = true;
                     grappleRope.enabled = true;
                 }
-                else
+               /* else
                 {
                     grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
                     grappleRope.enabled = true;
                     canGrappling = false;
-                }
+                }*/
             }
         }
-        else
+        /*else
         {
             grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
             grappleRope.enabled = true;
             canGrappling = false;
-        }
+        }*/
     }
 
     public void Grapple()
@@ -122,8 +120,10 @@ public class GrapplingHook : MonoBehaviour
 
     public void StopGrappling()
     {
+        audioManager.PlaySFX(audioManager.grappling);
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
+        canGrappling = false;
     }
     private void OnDrawGizmosSelected()
     {

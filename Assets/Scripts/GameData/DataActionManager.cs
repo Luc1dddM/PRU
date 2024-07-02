@@ -28,7 +28,6 @@ public class DataActionManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        instance = this;
         this.fileHandler = new FileHandler(Application.persistentDataPath, fileName);
     }
 
@@ -77,7 +76,7 @@ public class DataActionManager : MonoBehaviour
         //No data loaded == Nothing saved => New game
         if(this.gameData == null)
         {
-            NewGame();
+            return;
         }
 
         //Push the Loaded data to other IDataAction Script
@@ -85,8 +84,6 @@ public class DataActionManager : MonoBehaviour
         {
             action.LoadData(gameData);
         }
-
-        Debug.Log(gameData.playerPosition.ToString());
     }
 
     public void SaveGame()
@@ -128,11 +125,14 @@ public class DataActionManager : MonoBehaviour
         return gameData.sceneIndex;
     }
 
+    public bool HasSavedGame()
+    {
+        return gameData != null;
+    }
 
-   /* private void OnApplicationQuit()
+
+    private void OnApplicationQuit()
     {
         SaveGame();
-    }*/
-
-
+    }
 }

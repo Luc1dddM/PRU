@@ -68,7 +68,6 @@ public class Move : MonoBehaviour, IDataAction
 
         if (jumpSpeed == 0.0f && isGrounded)
         {
-
             CheckFacingDirection(moveInput);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
@@ -221,12 +220,19 @@ public class Move : MonoBehaviour, IDataAction
 
     public void LoadData(GameData gameData)
     {
+        if(gameData.playerPosition == new Vector3())
+        {
+            return;
+        }
         gameObject.transform.position = gameData.playerPosition;
     }
 
     public void SaveData(ref GameData gameData)
     {
-        gameData.playerPosition = this.transform.position;
+        if(this != null)
+        {
+            gameData.playerPosition = this.transform.position;
+        }
     }
 
     // OnCollisionEnter2D is called when this object collides with another object
