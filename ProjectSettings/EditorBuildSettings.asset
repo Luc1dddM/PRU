@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Castle/CastleMap1_Final.unity
     guid: 72b1affeb02fd14488a362121888dbba
+  - enabled: 1
+    path: Assets/Scenes/VictoryGame.unity
+    guid: 7e6c02d94fc3a484baba31b32569fe61
+  - enabled: 1
+    path: Assets/Scenes/IntroGame.unity
+    guid: d7f850419a3efb0498d3cc0c3ca7ae2d
   m_configObjects: {}

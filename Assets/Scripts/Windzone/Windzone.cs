@@ -5,9 +5,8 @@ using UnityEngine;
 public class Windzone : MonoBehaviour
 {
     public ParticleSystem leafParticleSystem; // Tham chiếu đến Particle System của lá
-    public float windForce = 5f; // Lực của gió
-    public float changeDirectionInterval = 4f; // Thời gian giữa các lần đổi chiều
-    public float slowDownDuration = 1f; // Thời gian chậm lại khi đổi chiều
+    public float windForce = 8f; // Lực của gió
+    public float changeDirectionInterval = 3f; // Thời gian giữa các lần đổi chiều
 
     private Vector2 windDirection = Vector2.left; // Hướng gió ban đầu
     private ParticleSystem.VelocityOverLifetimeModule velocityModule;
@@ -50,7 +49,7 @@ public class Windzone : MonoBehaviour
 
 
             // Đợi một chút để gió đổi chiều
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
 
             // Tiếp tục vòng lặp
         }
