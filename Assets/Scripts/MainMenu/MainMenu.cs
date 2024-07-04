@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,11 +33,19 @@ public class MainMenu : MonoBehaviour
         SceneController.instance.LoadFirstScene();
     }
 
-    public void VideoGame()
+    public void Settings()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
-        SceneManager.LoadScene("IntroGame"); ;
+        Time.timeScale = 0f; //pause game speed
+        SettingsMenuManager.instance.OpenSettingsMenu();
     }
+
+    public void QuitGame()
+    {
+        audioManager.PlaySFX(audioManager.buttonclick);
+        Application.Quit();
+    }
+}
 
     public void QuitGame()
     {
