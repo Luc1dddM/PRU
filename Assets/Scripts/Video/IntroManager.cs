@@ -14,18 +14,14 @@ public class IntroManager : MonoBehaviour
 
     private void OnVideoEnd(VideoPlayer vp)
     {
-        LoadNextScene();
+        DataActionManager.instance.NewGame();
+        SceneController.instance.LoadFirstScene();
     }
 
     public void SkipVideo()
     {
-        LoadNextScene();
+        DataActionManager.instance.NewGame();
+        SceneController.instance.LoadFirstScene();
         Debug.Log("Skip button clicked");
-    }
-
-    private void LoadNextScene()
-    {
-            SceneController.instance.LoadFirstScene();
-            Debug.Log("Loading first scene through SceneController");
     }
 }

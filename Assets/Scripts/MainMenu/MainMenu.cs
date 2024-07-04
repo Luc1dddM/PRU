@@ -40,12 +40,11 @@ public class MainMenu : MonoBehaviour
         SettingsMenuManager.instance.OpenSettingsMenu();
     }
 
-    public void QuitGame()
+    public void VideoGame()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
-        Application.Quit();
+        SceneManager.LoadScene("IntroGame");
     }
-}
 
     public void QuitGame()
     {
@@ -53,3 +52,5 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 }
+
+  
