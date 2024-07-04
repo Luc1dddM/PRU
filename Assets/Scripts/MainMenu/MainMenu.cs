@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +32,13 @@ public class MainMenu : MonoBehaviour
         DataActionManager.instance.NewGame();
         SceneController.instance.LoadFirstScene();
     }
+
+    public void VideoGame()
+    {
+        audioManager.PlaySFX(audioManager.buttonclick);
+        SceneManager.LoadScene("IntroGame"); ;
+    }
+
     public void QuitGame()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
