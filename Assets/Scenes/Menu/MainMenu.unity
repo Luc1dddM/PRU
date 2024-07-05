@@ -207,14 +207,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1887922117455266523, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1492784
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887922117455266523, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1012446
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887922117455266523, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_LocalPosition.x
       value: 466
       objectReference: {fileID: 0}
@@ -254,34 +246,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: background1
-      value: 
-      objectReference: {fileID: 8300000, guid: 3dacfc8094afbcf4cb270ad3aeb78e0f, type: 3}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: background2
-      value: 
-      objectReference: {fileID: 8300000, guid: ab26a6979f51a7a4b8b60b31e202231c, type: 3}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: background3
-      value: 
-      objectReference: {fileID: 8300000, guid: 0e0ccba6826668141a5037c2369553af, type: 3}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: background4
-      value: 
-      objectReference: {fileID: 8300000, guid: 9fc6fde3a1418d9439bbedfe3c21f3c3, type: 3}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: background5
-      value: 
-      objectReference: {fileID: 8300000, guid: d468938a36a9777459a13f44f9234db2, type: 3}
-    - target: {fileID: 4853227470046893079, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: mainMenuBackground
-      value: 
-      objectReference: {fileID: 8300000, guid: 14896f2660ab7b4428a3cf3c4eaaa808, type: 3}
-    - target: {fileID: 5399024401888775850, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5881980038489319634, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_Name
       value: GameController
@@ -292,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 1621479890}
     - target: {fileID: 7798480775467593380, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
