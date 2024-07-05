@@ -7,7 +7,6 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject restartConfirm;
-    [SerializeField] GameObject pauseMenuController;
 
     // Start is called before the first frame update
     private static bool isPaused = false;
