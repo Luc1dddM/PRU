@@ -89,7 +89,6 @@ public class PauseMenu : MonoBehaviour
         SceneController.instance.LoadMainMenu();
         isPaused = false;
         Time.timeScale = 1f;
-    }
 
     private IEnumerator LoadScene()
     {
