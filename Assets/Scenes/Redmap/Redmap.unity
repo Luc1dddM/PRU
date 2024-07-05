@@ -5795,6 +5795,10 @@ PrefabInstance:
       propertyPath: restartConfirm
       value: 
       objectReference: {fileID: 1630977649}
+    - target: {fileID: 7798480775467593380, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

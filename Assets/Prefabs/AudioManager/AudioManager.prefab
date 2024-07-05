@@ -542,7 +542,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8701112, y: 0.90806353, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 433978821720235557}
@@ -661,7 +661,12 @@ MonoBehaviour:
   SFXSource: {fileID: 9050029216620329562}
   ghostSource: {fileID: 423200705796970150}
   blackHoleSource: {fileID: 3352467545313628058}
-  background: {fileID: 8300000, guid: ab26a6979f51a7a4b8b60b31e202231c, type: 3}
+  mainMenuBackground: {fileID: 8300000, guid: 14896f2660ab7b4428a3cf3c4eaaa808, type: 3}
+  background1: {fileID: 8300000, guid: 3dacfc8094afbcf4cb270ad3aeb78e0f, type: 3}
+  background2: {fileID: 8300000, guid: ab26a6979f51a7a4b8b60b31e202231c, type: 3}
+  background3: {fileID: 8300000, guid: 0e0ccba6826668141a5037c2369553af, type: 3}
+  background4: {fileID: 8300000, guid: 9fc6fde3a1418d9439bbedfe3c21f3c3, type: 3}
+  background5: {fileID: 8300000, guid: d468938a36a9777459a13f44f9234db2, type: 3}
   walk: {fileID: 8300000, guid: b02f2a2a8c6b2b44ea227c09fa2a9a4d, type: 3}
   jump: {fileID: 8300000, guid: c457bcca3d5c2984bb3fccbc9fce708a, type: 3}
   doublejump: {fileID: 8300000, guid: 0d3d7a69f7848af4cb54c784ff796c01, type: 3}
@@ -671,7 +676,6 @@ MonoBehaviour:
   collectitem: {fileID: 8300000, guid: 91ce92e6198980946be6147d45fab335, type: 3}
   grappling: {fileID: 8300000, guid: c015698ca7d622040af2c2823b7b5ad4, type: 3}
   freeze: {fileID: 8300000, guid: 544d6c80691e8514d84936a6ddc79836, type: 3}
-  melting: {fileID: 8300000, guid: f3ee4293629af9b4fadf365cb5a1e69b, type: 3}
   crackingIce: {fileID: 8300000, guid: 4b5ff09f05b5459438c96d72e7686311, type: 3}
   mealtingclick: {fileID: 8300000, guid: b6a2b9850437c874b8665a8a99764304, type: 3}
   shieldactived: {fileID: 8300000, guid: 0b2a22c7d5fcee94d8beb9e5320be258, type: 3}
