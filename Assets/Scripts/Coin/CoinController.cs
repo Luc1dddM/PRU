@@ -52,10 +52,6 @@ public class CoinController : MonoBehaviour, IItemCollection
 
     public void activeItem()
     {
-        if (coinCout == 3)
-        {
-            CircleCollider2D.enabled = true;
-        }
     }
 
 

@@ -20,21 +20,19 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log(isPaused);
             if (isPaused)
             {
-                /*audioManager.PlaySFX(audioManager.menuopen);*/
                 Resume();
             }
             else
             {
-                /*audioManager.PlaySFX(audioManager.menuopen);*/
                 Pause();
             }
         }
     }
     public void Pause()
     {
+        audioManager.PlaySFX(audioManager.menuopen);
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;

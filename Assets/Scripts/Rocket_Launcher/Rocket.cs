@@ -16,8 +16,8 @@ public class Rocket : MonoBehaviour
     public float detonateTime = 7f;
 
     Collider2D[] inExplosionRadius = null; //indicate any collider within explosion radius
-    [SerializeField] private float ExplosionForceMulti = 500; //indicate how strong the force when hit other objects
-    [SerializeField] private float ExplosionRadius = 4; //explode radius can affect
+    [SerializeField] private float ExplosionForceMulti = 1000; //indicate how strong the force when hit other objects
+    [SerializeField] private float ExplosionRadius = 10; //explode radius can affect
     AudioManager audioManager;
 
     // Variable declaration end-------------------------------------------------------------------
