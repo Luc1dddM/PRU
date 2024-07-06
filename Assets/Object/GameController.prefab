@@ -209,7 +209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1887922117455266523}
   - component: {fileID: 1197282572595392081}
-  - component: {fileID: 6168737252166891120}
   - component: {fileID: 25011921165169501}
   - component: {fileID: 7772028261572775787}
   m_Layer: 0
@@ -250,20 +249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transAimt: {fileID: 6560159961069763510}
---- !u!114 &6168737252166891120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881980038489319634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eca4fb43fcd3ba844adf204b52703cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1691507487113654998}
-  restartConfirm: {fileID: 2210708065457800158}
 --- !u!114 &25011921165169501
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,7 +46,6 @@ public class AudioManager : MonoBehaviour
     private bool isGhostSoundPlaying;
     private bool isBlackHoleSoundPlaying;
 
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

@@ -30,15 +30,11 @@ public class PauseMenu : MonoBehaviour
                 Debug.Log(isPaused);
                 if (isPaused)
                 {
-
-
                     Resume();
                 }
                 else
                 {
-
                     Pause();
-
                 }
             }
         }
@@ -50,8 +46,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-
-
     }
 
 
