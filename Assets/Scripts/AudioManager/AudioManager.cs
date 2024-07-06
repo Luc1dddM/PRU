@@ -40,7 +40,6 @@ public class AudioManager : MonoBehaviour
     private bool isGhostSoundPlaying;
     private bool isBlackHoleSoundPlaying;
 
-
     private void Start()
     {
         musicSource.clip = background;

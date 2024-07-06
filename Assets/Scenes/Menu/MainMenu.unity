@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 6168737252166891120, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7798480775467593380, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -273,10 +277,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5881980038489319634, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1436912064}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
 --- !u!1 &204553829
 GameObject:
@@ -958,7 +959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1974208912}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -1195,7 +1196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1436912064}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Settings
         m_Mode: 1
@@ -1245,24 +1246,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323022218}
   m_CullTransparentMesh: 1
---- !u!1 &1436912059 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5881980038489319634, guid: 6465e0beb6fb548479b42c439fcbca81, type: 3}
-  m_PrefabInstance: {fileID: 130973022}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1436912064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436912059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6874479500c76e948b684de018cbaf1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  continueButton: {fileID: 1621479890}
 --- !u!1 &1621479888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1328,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1436912064}
+      - m_Target: {fileID: 1974208912}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -1477,9 +1460,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1436912064}
+      - m_Target: {fileID: 1974208912}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: VideoGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1538,6 +1521,7 @@ GameObject:
   - component: {fileID: 1974208911}
   - component: {fileID: 1974208910}
   - component: {fileID: 1974208909}
+  - component: {fileID: 1974208912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1619,6 +1603,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1974208912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974208908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6874479500c76e948b684de018cbaf1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continueButton: {fileID: 1803456158}
 --- !u!1 &2140705871
 GameObject:
   m_ObjectHideFlags: 0

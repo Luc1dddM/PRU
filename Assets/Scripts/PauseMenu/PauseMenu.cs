@@ -23,12 +23,12 @@ public class PauseMenu : MonoBehaviour
             Debug.Log(isPaused);
             if (isPaused)
             {
-                audioManager.PlaySFX(audioManager.menuopen);
+                /*audioManager.PlaySFX(audioManager.menuopen);*/
                 Resume();
             }
             else
             {
-                audioManager.PlaySFX(audioManager.menuopen);
+                /*audioManager.PlaySFX(audioManager.menuopen);*/
                 Pause();
             }
         }
