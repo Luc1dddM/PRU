@@ -12,7 +12,7 @@ public class Freeze : MonoBehaviour
     public Sprite skatingSprite;
 
     private SpriteRenderer spriteRenderer;
-    private bool isFire = false;
+    public bool isFire = false;
 
     private Animator animator;
     //private Move move;

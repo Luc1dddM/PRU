@@ -14918,7 +14918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2848869234172849637, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: slideSpeed
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2848869234172849637, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: groundCheck
