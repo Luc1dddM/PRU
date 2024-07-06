@@ -51,14 +51,17 @@ public class SlideMove : MonoBehaviour
         rb.gravityScale = 6f;
 
         // slide.cs
+        // Thiết lập ma sát hiện tại cho trượt
         currentFriction = friction;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Stop sliding when click arrow opposite site
+        // Ngừng trượt khi nhấn phím di chuyển ngược lại
         if (isSliding && IsOppositeSite()) StopSliding();
+
+        // Ngừng trượt khi nhấn phím Space
         if (Input.GetKey(KeyCode.Space))
         {
             isSliding = false;
@@ -67,11 +70,20 @@ public class SlideMove : MonoBehaviour
 
         moveInput = Input.GetAxisRaw("Horizontal");
         animator.SetBool("IsJumping", !isGrounded);
+
         //if (!isGrounded) animator.SetFloat("yVelocity", rb.velocity.y);
+
+        if (moveInput != 0 && jumpSpeed == 0f && isGrounded)
+        {
+            if (!isSliding && onIce && !IsOppositeSite())
+            {
+                StartSliding();
+            }
+        }
 
         if (moveInput != 0 && !isMoving && jumpSpeed == 0f && isGrounded)
         {
-            if (!isSliding && onIce) StartSliding();
+
             StopAllCoroutines();
             StartCoroutine(CanMoving());
             isMoving = true;
@@ -79,6 +91,7 @@ public class SlideMove : MonoBehaviour
         }
         else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
         {
+
             isMoving = false;
             audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
             rb.velocity = new Vector2(0f, rb.velocity.y);
@@ -276,7 +289,7 @@ public class SlideMove : MonoBehaviour
         // Đặt vận tốc trượt theo hướng nhảy lên
         Vector2 slideDirection = new Vector2(transform.localScale.x, 0).normalized;
         rb.velocity = new Vector2(slideDirection.x * slideSpeed, rb.velocity.y);
-        currentFriction = friction; // Reset current friction
+        currentFriction = friction; // ma sát khi trượt
     }
 
     void StopSliding()

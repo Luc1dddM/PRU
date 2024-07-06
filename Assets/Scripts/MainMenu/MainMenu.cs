@@ -47,9 +47,4 @@ public class MainMenu : MonoBehaviour
     }
 }
 
-    public void QuitGame()
-    {
-        audioManager.PlaySFX(audioManager.buttonclick);
-        Application.Quit();
-    }
-}
+   
