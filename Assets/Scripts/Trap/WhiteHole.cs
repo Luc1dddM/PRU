@@ -5,29 +5,32 @@ using UnityEngine;
 
 public class WhiteHole : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
-    public float intensity;
-    public float distanceBtPlayer;
-    Vector2 pullForce;
+  
+    [Header("Game Object Ref:")]
+    [SerializeField] private GameObject player;
+
+
+    [Header("White Hole Setting:")]
+    [SerializeField] private float intensity;
+    [SerializeField] private int range;
+
+
+    private float distanceBtPlayer;
+  
     // Start is called before the first frame update
-   
     private void Update()
     {
-        distanceBtPlayer = Vector2.Distance(player.transform.position, transform.position); ;
-        if(distanceBtPlayer <= 5)
-        {
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        /*    pullForce = (transform.position - player.transform.position).normalized / distanceBtPlayer * intensity;
-            rb.AddForce(pullForce, ForceMode2D.Force);*/
 
+        //Calculate distance between player and white hole
+        distanceBtPlayer = Vector2.Distance(player.transform.position, transform.position); ;
+        if(distanceBtPlayer <= range) //In area of influence
+        {
+            //Push Player
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
             Vector2 direction = player.transform.position - transform.position;
             direction.Normalize();
-            rb.AddForce(direction * 5f, ForceMode2D.Force);
+            rb.AddForce(direction * intensity, ForceMode2D.Force);
         }
         
     }
-
-    // Update is called once per frame
-    
 }
