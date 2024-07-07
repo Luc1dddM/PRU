@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1879424536}
-  intensity: 0
-  distanceBtPlayer: 0
+  intensity: 5
+  range: 5
 --- !u!1001 &26507740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3635,19 +3635,14 @@ MonoBehaviour:
   gunHolder: {fileID: 1879424543}
   gunPivot: {fileID: 1228339048}
   firePoint: {fileID: 262884005}
-  m_springJoint2D: {fileID: 1879424544}
+  m_DistanceJoint: {fileID: 1879424544}
   m_rigidbody: {fileID: 1879424541}
-  rotateOverTime: 0
-  rotationSpeed: 40.1
   hasMaxDistance: 1
   maxDistance: 20
   canGrappling: 0
-  autoConfigureDistance: 1
-  targetDistance: 5
-  targetFrequncy: 1
+  activeGrappling: 0
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
-  activeGrappling: 0
 --- !u!61 &345927317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4189,9 +4184,8 @@ MonoBehaviour:
   grapplingGun: {fileID: 345927316}
   cameraFollow: {fileID: 1833090121}
   whiteHole: {fileID: 9898635}
-  intensity: 5
-  range: 0
-  distanceBtPlayer: 0
+  range: 5
+  pullForce: 5
 --- !u!58 &787194953
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9135,11 +9129,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3
+      value: 47.3
       objectReference: {fileID: 0}
     - target: {fileID: 181922883879415780, guid: acc40f21942ece14dab99b55049f50e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46137,7 +46131,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 4.527693
+  m_Distance: 47.342266
   m_MaxDistanceOnly: 0
 --- !u!114 &1879424545
 MonoBehaviour:
