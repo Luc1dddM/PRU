@@ -25,12 +25,8 @@ public class GrapplingHook : MonoBehaviour
     public Transform firePoint;
 
     [Header("Physics Ref:")]
-    public DistanceJoint2D m_springJoint2D;
+    public DistanceJoint2D m_DistanceJoint;
     public Rigidbody2D m_rigidbody;
-
-    [Header("Rotation:")]
-    [SerializeField] private bool rotateOverTime = true;
-    [Range(0, 60)][SerializeField] private float rotationSpeed = 4;
 
     [Header("Distance:")]
     [SerializeField] private bool hasMaxDistance = false;
@@ -38,17 +34,12 @@ public class GrapplingHook : MonoBehaviour
 
     [Header("Grappling State:")]
     public bool canGrappling = false;
-
-    [Header("No Launch To Point")]
-    [SerializeField] private bool autoConfigureDistance = false;
-    [SerializeField] private float targetDistance = 3;
-    [SerializeField] private float targetFrequncy = 1;
+    public bool activeGrappling;
 
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
-
-    public bool activeGrappling;
-    AudioManager audioManager;
+    
+    private AudioManager audioManager;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -57,7 +48,7 @@ public class GrapplingHook : MonoBehaviour
     private void Start()
     {
         grappleRope.enabled = false;
-        m_springJoint2D.enabled = false;
+        m_DistanceJoint.enabled = false;
     }
 
     private void Update()
@@ -89,40 +80,22 @@ public class GrapplingHook : MonoBehaviour
                     canGrappling = true;
                     grappleRope.enabled = true;
                 }
-               /* else
-                {
-                    grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
-                    grappleRope.enabled = true;
-                    canGrappling = false;
-                }*/
             }
         }
-        /*else
-        {
-            grapplePoint = (Vector2)firePoint.position + distanceVector.normalized * maxDistance;
-            grappleRope.enabled = true;
-            canGrappling = false;
-        }*/
     }
 
     public void Grapple()
     {
-        m_springJoint2D.autoConfigureDistance = false;
-
-        if (autoConfigureDistance)
-        {
-            m_springJoint2D.autoConfigureDistance = true;
-        }
-
-        m_springJoint2D.connectedAnchor = grapplePoint;
-        m_springJoint2D.enabled = true;
+        m_DistanceJoint.autoConfigureDistance = true;
+        m_DistanceJoint.connectedAnchor = grapplePoint;
+        m_DistanceJoint.enabled = true;
     }
 
     public void StopGrappling()
     {
         audioManager.PlaySFX(audioManager.grappling);
         grappleRope.enabled = false;
-        m_springJoint2D.enabled = false;
+        m_DistanceJoint.enabled = false;
         canGrappling = false;
     }
     private void OnDrawGizmosSelected()

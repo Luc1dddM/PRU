@@ -58,6 +58,5 @@ public class SceneController : MonoBehaviour
         // Check if the next scene index is within the valid range
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         transAimt.SetTrigger("Start");
-
     }
 }

@@ -40,7 +40,6 @@ public class Tutorial_GrapplingRope : MonoBehaviour
         m_lineRenderer.positionCount = percision;
         waveSize = StartWaveSize;
         strightLine = false;
-        LinePointsToFirePoint();
         isGrappling = true;
         m_lineRenderer.enabled = true;
         playerAnimator.SetBool("IsUsingRope", true);
@@ -54,20 +53,9 @@ public class Tutorial_GrapplingRope : MonoBehaviour
         playerAnimator.SetBool("IsGrappling", false);
     }
 
-    private void LinePointsToFirePoint()
-    {
-        for (int i = 0; i < percision; i++)
-        {
-            m_lineRenderer.SetPosition(i, grapplingGun.firePoint.position);
-        }
-    }
-
-
     private void Update()
     {
         moveTime += Time.deltaTime;
-
-
 
         if (isGrappling)
         {
