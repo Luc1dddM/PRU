@@ -11027,7 +11027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial: {fileID: 1723504671}
   actionScript: {fileID: 1157539207}
-  id: 417a1fd4-65b1-4d89-a8a0-c10f9c67d15e
+  id: 441f53c0-03fe-40c5-a402-3764c11b58d6
 --- !u!1 &1332695311
 GameObject:
   m_ObjectHideFlags: 0
@@ -15452,7 +15452,7 @@ PrefabInstance:
       objectReference: {fileID: 570820759}
     - target: {fileID: 2248149072794261862, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2248149072794261862, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: healthAmount
