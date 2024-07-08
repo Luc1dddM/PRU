@@ -100,8 +100,8 @@ TextureImporter:
       name: main_lev_buildA_0
       rect:
         serializedVersion: 2
-        x: 578
-        y: 768
+        x: 508
+        y: 784
         width: 16
         height: 16
       alignment: 0
@@ -16852,7 +16852,7 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -1, y: -4}
-        - {x: -8, y: -7}
+        - {x: -8, y: -8}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -6}
@@ -17536,15 +17536,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 2, y: -1}
-        - {x: -2, y: 2}
-        - {x: -2, y: 6}
-        - {x: -4, y: 8}
+      - - {x: -6, y: 7}
         - {x: -8, y: 8}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -5}
-        - {x: 7, y: -3}
+        - {x: 2, y: -1}
       tessellationDetail: 0
       bones: []
       spriteID: 0eb32409d0df068458814c84ed3a4c30
