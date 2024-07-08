@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void Home()
     {
         audioManager.PlaySFX(audioManager.buttonclick);
+        DataActionManager.instance.SaveGame();
         StartCoroutine(LoadScene());
     }
 
