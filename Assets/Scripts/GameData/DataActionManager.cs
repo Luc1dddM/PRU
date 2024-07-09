@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -134,5 +134,11 @@ public class DataActionManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+
+    public void DeleteSaveFile()
+    {
+        fileHandler.DeleteFile(); // Gọi phương thức xóa file trong FileHandler của bạn
+        gameData = null;
     }
 }

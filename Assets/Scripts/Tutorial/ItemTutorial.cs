@@ -18,8 +18,10 @@ public class ItemTutorial : MonoBehaviour
     {
         if (isTutorialOn)
         {
+            Time.timeScale = 0f;
             if (Input.anyKeyDown)
             {
+                Time.timeScale = 1f;
                 tutorialPanel.SetActive(false);
                 isTutorialOn = false;
             }
