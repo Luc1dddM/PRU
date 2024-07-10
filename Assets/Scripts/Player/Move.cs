@@ -12,7 +12,7 @@ public class Move : MonoBehaviour, IDataAction
 
 
 
-    public Collider2D bodycollider;
+    public BoxCollider2D bodycollider;
     public Collider2D Footcollider;
     public PhysicsMaterial2D normalMa;
     public PhysicsMaterial2D bounceMa;
@@ -28,6 +28,8 @@ public class Move : MonoBehaviour, IDataAction
 
 
     AudioManager audioManager;
+    private Vector2 currentBody;
+    private Vector2 jumpBody;
     private bool isMoving;
     private float airTime = 0f; // Thời gian ở trên không
     private float minAirTime = 0.5f; // Thời gian tối thiểu trên không để phát âm thanh tiếp đất
@@ -36,6 +38,12 @@ public class Move : MonoBehaviour, IDataAction
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
+    private void FixedUpdate()
+    {
+
+
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -45,15 +53,24 @@ public class Move : MonoBehaviour, IDataAction
         Footcollider.sharedMaterial = normalMa;
         bodycollider.sharedMaterial = bounceMa;
         rb.gravityScale = 6f;
+        currentBody = bodycollider.size;
+        jumpBody = new Vector2(currentBody.x + 0.002f, currentBody.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Horizontal");
         animator.SetBool("IsJumping", !isGrounded);
         animator.SetFloat("yVelocity", rb.velocity.y);
+        moveInput = Input.GetAxisRaw("Horizontal");
 
+        if (jumpSpeed == 0.0f && isGrounded)
+        {
+            CheckFacingDirection();
+            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+
+        }
 
         if (moveInput != 0 && !isMoving && jumpSpeed == 0.0f && isGrounded)
         {
@@ -65,19 +82,18 @@ public class Move : MonoBehaviour, IDataAction
             isMoving = false;
             audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
         }
-        
 
-        if (jumpSpeed == 0.0f && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
-            CheckFacingDirection();
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
 
         }
 
+
         if (isGrounded)
         {
-            
+            bodycollider.size = currentBody;
             canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
             if (airTime >= minAirTime)
             {
@@ -90,7 +106,7 @@ public class Move : MonoBehaviour, IDataAction
         else
         {
             bodycollider.sharedMaterial = bounceMa;
-            
+            bodycollider.size = jumpBody;
 
             // Tăng thời gian ở trên không
             airTime += Time.deltaTime;
@@ -107,12 +123,7 @@ public class Move : MonoBehaviour, IDataAction
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
-        {
-            rb.velocity = new Vector2(0.0f, rb.velocity.y);
-            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-           
-        }
+
 
         if (jumpSpeed >= 30f && isGrounded)
         {
@@ -214,6 +225,11 @@ public class Move : MonoBehaviour, IDataAction
         {
             gameData.playerPosition = this.transform.position;
         }
+    }
+
+    private IEnumerator groudDelay()
+    {
+        yield return new WaitForEndOfFrame();
     }
 
     // OnCollisionEnter2D is called when this object collides with another object

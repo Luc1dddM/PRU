@@ -16,7 +16,15 @@ public class WhiteHole : MonoBehaviour
 
 
     private float distanceBtPlayer;
-  
+
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+     
+
+    }
+
     // Start is called before the first frame update
     private void Update()
     {
