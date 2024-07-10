@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -61,6 +61,28 @@ public class FileHandler
         catch(Exception ex)
         {
             Debug.LogError(ex);
+        }
+    }
+
+    public void DeleteFile()
+    {
+        string filePath = Path.Combine(dataDirPath, dataFileName);
+
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                Debug.Log("Deleted save file: " + dataFileName); // Thêm log để xác nhận file đã được xóa
+            }
+            else
+            {
+                Debug.Log("No save file found to delete: " + dataFileName); // Thêm log để xác nhận không tìm thấy file để xóa
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to delete save file: " + dataFileName + ". Error: " + e.Message); // Thêm log để hiển thị lỗi nếu có lỗi xảy ra
         }
     }
 }

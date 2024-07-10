@@ -16,7 +16,11 @@ public class EndGame : MonoBehaviour
 
     void OnVideoEnd(VideoPlayer vp)
     {
-        /*DataActionManager.instance.NewGame();*/
         SceneManager.LoadScene("MainMenu"); // Chuyển đến scene "MainMenu"
+      /*  DataActionManager.instance.NewGame();
+        SceneController.instance.LoadFirstScene();*/
+
+        // Xóa file lưu trữ khi kết thúc trò chơi
+        DataActionManager.instance.DeleteSaveFile();
     }
 }
