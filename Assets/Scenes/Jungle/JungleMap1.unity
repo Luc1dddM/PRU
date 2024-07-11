@@ -4594,6 +4594,7 @@ MonoBehaviour:
   grapplingGun: {fileID: 345927316}
   cameraFollow: {fileID: 1833090121}
   whiteHole: {fileID: 9898635}
+  playerRb: {fileID: 1879424541}
   range: 5
   pullForce: 5
 --- !u!58 &787194953
