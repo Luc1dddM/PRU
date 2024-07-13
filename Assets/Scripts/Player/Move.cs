@@ -38,12 +38,6 @@ public class Move : MonoBehaviour, IDataAction
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
-    private void FixedUpdate()
-    {
-
-
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +77,7 @@ public class Move : MonoBehaviour, IDataAction
             audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
             animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
@@ -112,8 +106,8 @@ public class Move : MonoBehaviour, IDataAction
             airTime += Time.deltaTime;
         }
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
-            , new Vector2(1.163f, 0.03f), 0f, groundMask);
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), 
+            new Vector2(1.162f, 0.03f), 0f, groundMask);
         if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
         {
             CheckFacingDirection();
@@ -188,7 +182,7 @@ public class Move : MonoBehaviour, IDataAction
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), new Vector2(1.163f, 0.03f));
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f), new Vector2(1.162f, 0.03f));
 
     }
 
