@@ -15363,7 +15363,7 @@ PrefabInstance:
       objectReference: {fileID: 570820759}
     - target: {fileID: 2248149072794261862, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2248149072794261862, guid: 18f98c1570d2b7a4381c22d0d6a22bb7, type: 3}
       propertyPath: healthAmount

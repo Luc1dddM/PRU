@@ -60,100 +60,103 @@ public class Move : MonoBehaviour, IDataAction
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("IsJumping", !isGrounded);
-        animator.SetFloat("yVelocity", rb.velocity.y);
-        moveInput = Input.GetAxisRaw("Horizontal");
-
-        if (jumpSpeed == 0.0f && isGrounded)
+        if (!PauseMenu.isPaused)
         {
-            CheckFacingDirection();
-            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+            animator.SetBool("IsJumping", !isGrounded);
+            animator.SetFloat("yVelocity", rb.velocity.y);
+            moveInput = Input.GetAxisRaw("Horizontal");
 
-        }
-
-        if (moveInput != 0 && !isMoving && jumpSpeed == 0.0f && isGrounded)
-        {
-            isMoving = true;
-            audioManager.PlayWalk(); // Phát âm thanh walk khi bắt đầu di chuyển
-        }
-        else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
-        {
-            isMoving = false;
-            audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
-        {
-            rb.velocity = new Vector2(0.0f, rb.velocity.y);
-            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-
-        }
-
-
-        if (isGrounded)
-        {
-            bodycollider.size = currentBody;
-            canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
-            if (airTime >= minAirTime)
+            if (jumpSpeed == 0.0f && isGrounded)
             {
-                audioManager.PlaySFX(audioManager.fall);
+                CheckFacingDirection();
+                animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+                rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+
             }
 
-            // Đặt lại thời gian trên không
-            airTime = 0f;
-        }
-        else
-        {
-            bodycollider.sharedMaterial = bounceMa;
-            bodycollider.size = jumpBody;
+            if (moveInput != 0 && !isMoving && jumpSpeed == 0.0f && isGrounded)
+            {
+                isMoving = true;
+                audioManager.PlayWalk(); // Phát âm thanh walk khi bắt đầu di chuyển
+            }
+            else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
+            {
+                isMoving = false;
+                audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
+            }
 
-            // Tăng thời gian ở trên không
-            airTime += Time.deltaTime;
-        }
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
+            {
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+                animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
-            , new Vector2(1.163f, 0.03f), 0f, groundMask);
-        if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
-        {
-            CheckFacingDirection();
-            jumpSpeed += Time.deltaTime * 60f;
-            animator.SetBool("IsRecharge", true);
-            canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
-
-        }
+            }
 
 
-
-        if (jumpSpeed >= 30f && isGrounded)
-        {
-            float tempx = moveInput * walkSpeed * jumpDistance;
-            float tempy = jumpSpeed;
-
-            animator.SetBool("IsRecharge", false);
-            rb.velocity = new Vector2(tempx, tempy);
-            canJump = false;
-            canDoubleJump = true; // Đặt trạng thái nhảy khi nhảy lên
-            audioManager.PlaySFX(audioManager.jump);
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
-                animator.SetBool("IsRecharge", false);
-                canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
-                audioManager.PlaySFX(audioManager.jump);
-            }
-            canJump = true;
-           
-        }
+                bodycollider.size = currentBody;
+                canDoubleJump = false; // Đặt lại trạng thái nhảy khi tiếp đất
+                if (airTime >= minAirTime)
+                {
+                    audioManager.PlaySFX(audioManager.fall);
+                }
 
-        if(rb.velocity.y < 0)
-        {
-            animator.SetBool("IsRecharge", false);
+                // Đặt lại thời gian trên không
+                airTime = 0f;
+            }
+            else
+            {
+                bodycollider.sharedMaterial = bounceMa;
+                bodycollider.size = jumpBody;
+
+                // Tăng thời gian ở trên không
+                airTime += Time.deltaTime;
+            }
+
+            isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.64f)
+                , new Vector2(1.163f, 0.03f), 0f, groundMask);
+            if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
+            {
+                CheckFacingDirection();
+                jumpSpeed += Time.deltaTime * 60f;
+                animator.SetBool("IsRecharge", true);
+                canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
+
+            }
+
+
+
+            if (jumpSpeed >= 30f && isGrounded)
+            {
+                float tempx = moveInput * walkSpeed * jumpDistance;
+                float tempy = jumpSpeed;
+
+                animator.SetBool("IsRecharge", false);
+                rb.velocity = new Vector2(tempx, tempy);
+                canJump = false;
+                canDoubleJump = true; // Đặt trạng thái nhảy khi nhảy lên
+                audioManager.PlaySFX(audioManager.jump);
+
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                if (isGrounded)
+                {
+                    rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
+                    animator.SetBool("IsRecharge", false);
+                    canDoubleJump = true; // Đặt lại trạng thái nhảy khi đang ở trên mặt đất
+                    audioManager.PlaySFX(audioManager.jump);
+                }
+                canJump = true;
+
+            }
+
+            if (rb.velocity.y < 0)
+            {
+                animator.SetBool("IsRecharge", false);
+            }
         }
     }
 

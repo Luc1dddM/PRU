@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Header("Object Ref:")]
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject restartConfirm;
 
     // Start is called before the first frame update
-    private static bool isPaused = false;
+    public static bool isPaused = false;
     AudioManager audioManager;
     private void Awake()
     {

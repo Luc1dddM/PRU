@@ -58,114 +58,117 @@ public class SlideMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Ngừng trượt khi nhấn phím di chuyển ngược lại
-        if (isSliding && IsOppositeSite()) StopSliding();
-
-        // Ngừng trượt khi nhấn phím Space
-        if (Input.GetKey(KeyCode.Space))
+        if(!PauseMenu.isPaused)
         {
-            isSliding = false;
-            animator.SetBool("IsSliding", false);
-        }
+            // Ngừng trượt khi nhấn phím di chuyển ngược lại
+            if (isSliding && IsOppositeSite()) StopSliding();
 
-        moveInput = Input.GetAxisRaw("Horizontal");
-        animator.SetBool("IsJumping", !isGrounded);
-
-        //if (!isGrounded) animator.SetFloat("yVelocity", rb.velocity.y);
-
-        if (moveInput != 0 && jumpSpeed == 0f && isGrounded)
-        {
-            if (!isSliding && onIce && !IsOppositeSite())
+            // Ngừng trượt khi nhấn phím Space
+            if (Input.GetKey(KeyCode.Space))
             {
-                StartSliding();
-            }
-        }
-
-        if (moveInput != 0 && !isMoving && jumpSpeed == 0f && isGrounded)
-        {
-
-            StopAllCoroutines();
-            StartCoroutine(CanMoving());
-            isMoving = true;
-            audioManager.PlayWalk(); // Phát âm thanh walk khi bắt đầu di chuyển
-        }
-        else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
-        {
-
-            isMoving = false;
-            audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
-            rb.velocity = new Vector2(0f, rb.velocity.y);
-            animator.SetFloat("Movement", 0);
-        }
-
-        if (jumpSpeed == 0f && isGrounded && !isStop)
-        {
-            CheckFacingDirection();
-            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
-        }
-
-        if (isGrounded)
-        {
-            if (airTime >= minAirTime)
-            {
-                audioManager.PlaySFX(audioManager.fall);
+                isSliding = false;
+                animator.SetBool("IsSliding", false);
             }
 
-            // Đặt lại thời gian trên không
-            airTime = 0f;
-        }
-        else
-        {
-            bodycollider.sharedMaterial = bounceMa;
-            // Tăng thời gian ở trên không
-            airTime += Time.deltaTime;
-        }
+            moveInput = Input.GetAxisRaw("Horizontal");
+            animator.SetBool("IsJumping", !isGrounded);
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y - 0.64f)
-            , new Vector2(1.163f, 0.03f), 0f, groundMask);
+            //if (!isGrounded) animator.SetFloat("yVelocity", rb.velocity.y);
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
-        {
-            CheckFacingDirection();
-            jumpSpeed += Time.deltaTime * 60f;
-            animator.SetBool("IsRecharge", true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
-        {
-            rb.velocity = new Vector2(0.0f, rb.velocity.y);
-            animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
-        }
-
-        if (jumpSpeed >= 30f && isGrounded)
-        {
-            var direction = facingRight ? 1 : -1;
-            if (moveInput != 0)
+            if (moveInput != 0 && jumpSpeed == 0f && isGrounded)
             {
-                Flip();
-                direction = (int)Mathf.Sign(Input.GetAxisRaw("Horizontal"));
+                if (!isSliding && onIce && !IsOppositeSite())
+                {
+                    StartSliding();
+                }
             }
-            float tempx = direction * walkSpeed * jumpDistance;
-            float tempy = jumpSpeed;
 
-            animator.SetBool("IsRecharge", false);
-            rb.velocity = new Vector2(tempx, tempy);
-            canJump = false;
-            audioManager.PlaySFX(audioManager.jump);
-        }
+            if (moveInput != 0 && !isMoving && jumpSpeed == 0f && isGrounded)
+            {
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
+                StopAllCoroutines();
+                StartCoroutine(CanMoving());
+                isMoving = true;
+                audioManager.PlayWalk(); // Phát âm thanh walk khi bắt đầu di chuyển
+            }
+            else if (isMoving && (moveInput == 0 || jumpSpeed > 0.0f || !isGrounded))
+            {
+
+                isMoving = false;
+                audioManager.StopWalk(); // Dừng âm thanh walk khi dừng di chuyển
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+                animator.SetFloat("Movement", 0);
+            }
+
+            if (jumpSpeed == 0f && isGrounded && !isStop)
+            {
+                CheckFacingDirection();
+                animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+                rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+            }
+
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
+                if (airTime >= minAirTime)
+                {
+                    audioManager.PlaySFX(audioManager.fall);
+                }
+
+                // Đặt lại thời gian trên không
+                airTime = 0f;
+            }
+            else
+            {
+                bodycollider.sharedMaterial = bounceMa;
+                // Tăng thời gian ở trên không
+                airTime += Time.deltaTime;
+            }
+
+            isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y - 0.64f)
+                , new Vector2(1.163f, 0.03f), 0f, groundMask);
+
+            if (Input.GetKey(KeyCode.Space) && isGrounded && canJump)
+            {
+                CheckFacingDirection();
+                jumpSpeed += Time.deltaTime * 60f;
+                animator.SetBool("IsRecharge", true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
+            {
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+                animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+            }
+
+            if (jumpSpeed >= 30f && isGrounded)
+            {
+                var direction = facingRight ? 1 : -1;
+                if (moveInput != 0)
+                {
+                    Flip();
+                    direction = (int)Mathf.Sign(Input.GetAxisRaw("Horizontal"));
+                }
+                float tempx = direction * walkSpeed * jumpDistance;
+                float tempy = jumpSpeed;
+
                 animator.SetBool("IsRecharge", false);
+                rb.velocity = new Vector2(tempx, tempy);
+                canJump = false;
                 audioManager.PlaySFX(audioManager.jump);
             }
-            canJump = true;
-        }
 
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                if (isGrounded)
+                {
+                    rb.velocity = new Vector2(moveInput * walkSpeed * jumpDistance, jumpSpeed);
+                    animator.SetBool("IsRecharge", false);
+                    audioManager.PlaySFX(audioManager.jump);
+                }
+                canJump = true;
+            }
+
+        }
         //if (rb.velocity.y < 0) animator.SetBool("IsRecharge", false);
     }
 

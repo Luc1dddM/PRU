@@ -53,15 +53,17 @@ public class GrapplingHook : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
+        if (!PauseMenu.isPaused)
         {
-            SetGrapplePoint();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && activeGrappling)
+            {
+                SetGrapplePoint();
+            }
+            else if (Input.GetKeyUp(KeyCode.Mouse0) && canGrappling)
+            {
+                StopGrappling();
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0) && canGrappling)
-        {
-            StopGrappling();
-        }
-       
     }
 
     void SetGrapplePoint()
