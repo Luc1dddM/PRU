@@ -88,6 +88,7 @@ public class DataActionManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("Loaded");
         if(this.gameData == null)
         {
             return;
@@ -107,10 +108,9 @@ public class DataActionManager : MonoBehaviour
         {
             action.SaveData(ref gameData);
         }
-
+        gameData.isReset = false;
         fileHandler.SaveToFile(gameData);
 
-        Debug.Log("Saved Position: " + gameData.playerPosition.ToString());
     }
 
     public int GetSavedSceneIndex()

@@ -218,6 +218,7 @@ public class Move : MonoBehaviour, IDataAction
 
     public void SaveData(ref GameData gameData)
     {
+        Debug.Log("Save position test");
         if(this != null)
         {
             gameData.playerPosition = this.transform.position;

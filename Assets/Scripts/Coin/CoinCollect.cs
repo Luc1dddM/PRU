@@ -52,10 +52,15 @@ public class CoinCollect : MonoBehaviour, IDataAction
 
     public void SaveData(ref GameData gameData)
     {
-        Debug.Log("Test collected" + isCollected);
+        
         if (gameData.itemCollected.ContainsKey(id))
         {
             gameData.itemCollected.Remove(id);
+        }
+
+        if(gameData.isReset)
+        {
+            isCollected = false;
         }
         gameData.itemCollected.Add(id, isCollected);
         gameData.coinNumber = CoinController.instance.coinCout;

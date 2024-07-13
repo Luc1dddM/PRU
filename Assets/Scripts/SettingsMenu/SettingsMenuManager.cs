@@ -39,6 +39,15 @@ public class SettingsMenuManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingsMenu.SetActive(false);
+            PauseMenu.isPaused = false;
+        }
+    }
+
     public void OpenSettingsMenu() //call by Settings() in PauseMenu.cs 
     {
         settingsMenu.SetActive(true);
@@ -49,6 +58,7 @@ public class SettingsMenuManager : MonoBehaviour
         audioManager.PlaySFX(audioManager.buttonclick);
         settingsMenu.SetActive(false);
         Time.timeScale = 1f; //return the real-time game speed 
+        PauseMenu.isPaused = false;
         // PauseMenu.PauseMenuInstance.Pause(); //still pause when close setting
     }
 

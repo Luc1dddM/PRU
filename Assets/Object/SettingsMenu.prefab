@@ -1930,6 +1930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 7684167817294375509}
   audioMixer: {fileID: 24100000, guid: d1eff566631a8ce41a4564459d350b4a, type: 2}
+  pauseMenu: {fileID: 5882986056480122325, guid: 0257db78f7b34a746a8cdb7753bc7f98, type: 3}
   masterSlider: {fileID: 6452285075544966942}
   musicSlider: {fileID: 1958910774530431261}
   sfxSlider: {fileID: 420116749011100886}

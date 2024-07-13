@@ -48,7 +48,7 @@ public class SceneController : MonoBehaviour
     public void NewGame()
     {
         DataActionManager.instance.NewGame();
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator LoadNewScene()
