@@ -106,7 +106,14 @@ public class Freeze : MonoBehaviour
         {
             if (healthAmount > 0 && isFire)
             {
-                Heal(10);
+                if (!cloth)
+                {
+                    Heal(10);
+                }
+                else
+                {
+                    Heal(10); 
+                }
             }
             yield return new WaitForSeconds(0.5f); // chờ 0.5s trước khi tăng
         }
@@ -120,12 +127,12 @@ public class Freeze : MonoBehaviour
                 // sau khi lấy item
                 if (cloth == false)
                 {
-                    yield return new WaitForSeconds(1f); // chờ 1s trước khi tăng
-                    TakeDamage(8); // thanh đóng băng tăng 
+                    yield return new WaitForSeconds(1.3f); // chờ 1s trước khi tăng
+                    TakeDamage(10); // thanh đóng băng tăng 
                 }
                 else if (cloth == true)
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.6f);
                     TakeDamage(10);
                 }
             }
